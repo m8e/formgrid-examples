@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière Studio — Fine Art Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --charcoal: #1a1a1a;
+      --charcoal-mid: #252525;
+      --charcoal-light: #333333;
+      --warm: #c9a96e;
+      --warm-light: #dfc08a;
+      --warm-pale: #f5eddf;
+      --off-white: #faf9f7;
+      --white: #ffffff;
+      --text: #1a1a1a;
+      --muted: #767676;
+      --border: #e8e4de;
+      --radius: 2px;
+      --radius-lg: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ====== NAV ====== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 24px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span {
+      color: var(--warm);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--warm); }
+
+    .nav-cta {
+      border: 1px solid var(--warm) !important;
+      color: var(--warm) !important;
+      padding: 9px 22px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--warm) !important;
+      color: var(--charcoal) !important;
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      min-height: 100vh;
+      background: var(--charcoal);
+      display: flex;
+      align-items: stretch;
+      padding-top: 73px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--warm);
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      max-width: 380px;
+      line-height: 1.85;
+      margin-bottom: 52px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 40px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .meta-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--warm);
+      line-height: 1;
+    }
+
+    .meta-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .hero-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+      align-self: stretch;
+    }
+
+    /* ====== HERO MOSAIC ====== */
+    .hero-mosaic {
+      width: 420px;
+      flex-shrink: 0;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      position: relative;
+    }
+
+    .mosaic-cell {
+      position: relative;
+      overflow: hidden;
+      background: var(--charcoal-mid);
+    }
+
+    .mosaic-cell:nth-child(1) {
+      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+    }
+
+    .mosaic-cell-inner {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 6s ease;
+    }
+
+    .mosaic-cell:hover .mosaic-cell-inner {
+      transform: scale(1.04);
+    }
+
+    .mosaic-cell:nth-child(1) .mosaic-cell-inner {
+      background-image: url('https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .mosaic-cell:nth-child(2) .mosaic-cell-inner {
+      background-image: url('https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .mosaic-cell:nth-child(3) .mosaic-cell-inner {
+      background-image: url('https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Decorative photo placeholders with grain */
+    .mosaic-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .mosaic-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      z-index: 2;
+    }
+
+    .mosaic-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm);
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.25);
+      padding: 4px 10px;
+      display: inline-block;
+    }
+
+    /* ====== FORM OVERLAY ====== */
+    .form-section {
+      background: var(--off-white);
+      padding: 80px 64px;
+    }
+
+    .form-section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+    }
+
+    .form-intro {
+      flex: 1;
+      position: sticky;
+      top: 120px;
+    }
+
+    .form-intro .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-intro .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--warm);
+    }
+
+    .form-intro h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .form-intro h2 em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .form-intro p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 40px;
+    }
+
+    .form-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .form-feature-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--warm-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .form-feature-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--warm);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .form-feature-text h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .form-feature-text p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ====== BOOKING FORM ====== */
+    .booking-form-wrap {
+      width: 480px;
+      flex-shrink: 0;
+    }
+
+    .booking-form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    .booking-form-header {
+      background: var(--charcoal);
+      padding: 28px 32px;
+      position: relative;
+    }
+
+    .booking-form-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 32px;
+      right: 32px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--warm),
+        transparent
+      );
+    }
+
+    .booking-form-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .booking-form-header p {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .booking-form-body {
+      padding: 32px;
+    }
+
+    .form-field {
+      margin-bottom: 20px;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+    }
+
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23767676' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-field textarea {
+      min-height: 100px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--warm);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.1);
+      background: var(--white);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .package-selector {
+      margin-bottom: 20px;
+    }
+
+    .package-selector label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .package-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .package-option {
+      position: relative;
+    }
+
+    .package-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .package-option label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: 0;
+      transition: all 0.15s;
+    }
+
+    .package-option input:checked + label {
+      background: rgba(201,169,110,0.06);
+      border-color: var(--warm);
+      color: var(--charcoal);
+    }
+
+    .package-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--warm);
+    }
+
+    .package-option input:checked + label .package-price {
+      font-weight: 500;
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: 15px;
+      background: var(--charcoal);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-book::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--warm);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .btn-book:hover {
+      background: var(--charcoal-light);
+    }
+
+    .btn-book:hover::after {
+      transform: scaleX(1);
+    }
+
+    .btn-book:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 48px 32px;
+    }
+
+    .success-line {
+      width: 48px;
+      height: 1px;
+      background: var(--warm);
+      margin: 0 auto 24px;
+    }
+
+    .form-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .form-success p {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ====== PORTFOLIO STRIP ====== */
+    .portfolio-strip {
+      padding: 0;
+      background: var(--charcoal);
+      overflow: hidden;
+    }
+
+    .portfolio-strip-inner {
+      display: flex;
+      gap: 3px;
+    }
+
+    .strip-cell {
+      flex: 1;
+      aspect-ratio: 3/4;
+      background: var(--charcoal-mid);
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .strip-cell-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 6s ease;
+    }
+
+    .strip-cell:hover .strip-cell-bg {
+      transform: scale(1.06);
+    }
+
+    .strip-cell:nth-child(1) .strip-cell-bg {
+      background-image: url('https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .strip-cell:nth-child(2) .strip-cell-bg {
+      background-image: url('https://images.pexels.com/photos/1128318/pexels-photo-1128318.jpeg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .strip-cell:nth-child(3) .strip-cell-bg {
+      background-image: url('https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .strip-cell:nth-child(4) .strip-cell-bg {
+      background-image: url('https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .strip-cell:nth-child(5) .strip-cell-bg {
+      background-image: url('https://images.pexels.com/photos/1587309/pexels-photo-1587309.jpeg?auto=compress&cs=tinysrgb&w=600');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .strip-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.75) 0%,
+        transparent 50%
+      );
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 2;
+    }
+
+    .strip-cell:hover .strip-overlay {
+      opacity: 1;
+    }
+
+    .strip-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm);
+    }
+
+    /* ====== SERVICES ====== */
+    .services {
+      padding: 100px 64px;
+      background: var(--off-white);
+    }
+
+    .services-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--warm);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.15;
+      margin-bottom: 56px;
+      max-width: 480px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--white);
+      padding: 40px 32px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .service-card:hover {
+      background: var(--charcoal);
+    }
+
+    .service-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--warm-pale);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover .service-card-num {
+      color: rgba(201,169,110,0.2);
+    }
+
+    .service-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover .service-card-title {
+      color: var(--white);
+    }
+
+    .service-card-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover .service-card-desc {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .service-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--warm);
+      font-weight: 400;
+    }
+
+    /* ====== PROCESS ====== */
+    .process {
+      padding: 100px 64px;
+      background: var(--charcoal);
+    }
+
+    .process-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .process .section-eyebrow {
+      color: var(--warm);
+    }
+
+    .process .section-title {
+      color: var(--white);
+      margin-bottom: 64px;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .process-step {
+      background: var(--charcoal-mid);
+      padding: 36px 28px;
+      position: relative;
+    }
+
+    .process-step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 28px;
+      right: 28px;
+      height: 1px;
+      background: rgba(201,169,110,0.2);
+    }
+
+    .process-step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(201,169,110,0.12);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .process-step-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .process-step-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+    }
+
+    /* ====== TESTIMONIALS ====== */
+    .testimonials {
+      padding: 100px 64px;
+      background: var(--warm-pale);
+    }
+
+    .testimonials-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .testimonials .section-title {
+      margin-bottom: 56px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 36px 32px;
+      border-radius: var(--radius-lg);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        90deg, var(--warm), transparent
+      );
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--warm-pale);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-text {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--warm-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--warm);
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .author-detail {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ====== CTA ====== */
+    .cta-section {
+      padding: 120px 64px;
+      background: var(--charcoal);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(
+        circle,
+        rgba(201,169,110,0.06) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .cta-section .section-eyebrow {
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .cta-section .section-eyebrow::before {
+      display: none;
+    }
+
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section h2 em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .cta-section p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      padding: 14px 36px;
+      background: var(--warm);
+      color: var(--charcoal);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--warm-light);
+    }
+
+    .btn-ghost {
+      padding: 14px 36px;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--warm);
+      color: var(--warm);
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: #111111;
+      padding: 56px 64px 32px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand-name span {
+      color: var(--warm);
+    }
+
+    .footer-brand-tagline {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+      max-width: 240px;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 48px;
+    }
+
+    .footer-link-group h4 {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 16px;
+    }
+
+    .footer-link-group ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-link-group a {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link-group a:hover {
+      color: var(--warm);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .footer-copy a {
+      color: var(--warm);
+      text-decoration: none;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 1024px) {
+      nav { padding: 20px 32px; }
+      .nav-links { display: none; }
+
+      .hero {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding: 60px 32px 40px;
+        text-align: center;
+      }
+
+      .hero-eyebrow { justify-content: center; }
+      .hero-eyebrow::before { display: none; }
+      .hero-desc { margin: 0 auto 40px; }
+      .hero-meta { justify-content: center; }
+
+      .hero-mosaic {
+        width: 100%;
+        height: 300px;
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .mosaic-cell:nth-child(1) {
+        grid-row: 1;
+        grid-column: 1;
+      }
+
+      .form-section { padding: 64px 32px; }
+
+      .form-section-inner {
+        flex-direction: column;
+        gap: 48px;
+      }
+
+      .form-intro { position: static; }
+
+      .booking-form-wrap {
+        width: 100%;
+        max-width: 480px;
+      }
+
+      .services,
+      .process,
+      .testimonials,
+      .cta-section {
+        padding: 64px 32px;
+      }
+
+      .services-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .portfolio-strip-inner {
+        overflow-x: auto;
+      }
+
+      .strip-cell {
+        min-width: 200px;
+        flex-shrink: 0;
+      }
+
+      footer { padding: 48px 32px 24px; }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .footer-links { flex-wrap: wrap; gap: 32px; }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.6rem; }
+
+      .services-grid,
+      .testimonials-grid,
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .cta-buttons { flex-direction: column; }
+
+      .hero-meta { flex-wrap: wrap; gap: 20px; }
+      .hero-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      Lumiere <span>Studio</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#booking" class="nav-cta">Book a Session</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Fine Art Photography</div>
+      <h1>
+        Moments made<br />
+        <em>timeless.</em>
+      </h1>
+      <p class="hero-desc">
+        Award-winning photography for weddings,
+        portraits, and editorial work. Every image
+        is crafted with intention, light, and a
+        deep respect for the story you carry.
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-num">340+</span>
+          <span class="meta-label">Sessions Delivered</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="meta-item">
+          <span class="meta-num">8</span>
+          <span class="meta-label">Years Experience</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="meta-item">
+          <span class="meta-num">4.9</span>
+          <span class="meta-label">Average Rating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-mosaic" id="portfolio">
+      <div class="mosaic-cell">
+        <div class="mosaic-cell-inner"></div>
+        <div class="mosaic-overlay">
+          <span class="mosaic-tag">Wedding</span>
+        </div>
+      </div>
+      <div class="mosaic-cell">
+        <div class="mosaic-cell-inner"></div>
+        <div class="mosaic-overlay">
+          <span class="mosaic-tag">Portrait</span>
+        </div>
+      </div>
+      <div class="mosaic-cell">
+        <div class="mosaic-cell-inner"></div>
+        <div class="mosaic-overlay">
+          <span class="mosaic-tag">Editorial</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO STRIP -->
+  <div class="portfolio-strip">
+    <div class="portfolio-strip-inner">
+      <div class="strip-cell">
+        <div class="strip-cell-bg"></div>
+        <div class="strip-overlay">
+          <span class="strip-label">Engagement</span>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div class="strip-cell-bg"></div>
+        <div class="strip-overlay">
+          <span class="strip-label">Family</span>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div class="strip-cell-bg"></div>
+        <div class="strip-overlay">
+          <span class="strip-label">Newborn</span>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div class="strip-cell-bg"></div>
+        <div class="strip-overlay">
+          <span class="strip-label">Corporate</span>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div class="strip-cell-bg"></div>
+        <div class="strip-overlay">
+          <span class="strip-label">Boudoir</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING FORM -->
+  <section class="form-section" id="booking">
+    <div class="form-section-inner">
+
+      <div class="form-intro">
+        <div class="section-eyebrow">Book a Session</div>
+        <h2>
+          Let us create<br />
+          something <em>beautiful</em><br />
+          together.
+        </h2>
+        <p>
+          Every session begins with a conversation.
+          Share a few details about your vision and
+          we will be in touch within 24 hours to
+          discuss your date, location, and package.
+        </p>
+        <div class="form-features">
+          <div class="form-feature">
+            <div class="form-feature-icon">
+              <svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="form-feature-text">
+              <h4>Response within 24 hours</h4>
+              <p>We read every enquiry personally
+                and respond promptly.</p>
+            </div>
+          </div>
+          <div class="form-feature">
+            <div class="form-feature-icon">
+              <svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="form-feature-text">
+              <h4>No obligation consultation</h4>
+              <p>A free call to understand your
+                vision before you commit.</p>
+            </div>
+          </div>
+          <div class="form-feature">
+            <div class="form-feature-icon">
+              <svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="form-feature-text">
+              <h4>Flexible scheduling</h4>
+              <p>Weekday, weekend, and golden
+                hour sessions available.</p>
+            </div>
+          </div>
+          <div class="form-feature">
+            <div class="form-feature-icon">
+              <svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="form-feature-text">
+              <h4>Full gallery delivery</h4>
+              <p>High resolution images delivered
+                via private online gallery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-form-wrap">
+        <div class="booking-form-card">
+          <div class="booking-form-header">
+            <h3>Enquire About a Session</h3>
+            <p>We will get back to you within 24 hours.</p>
+          </div>
+          <div class="booking-form-body">
+            <form id="booking-form">
+
+              <input
+                type="hidden"
+                name="_subject"
+                id="booking-subject"
+                value="New Photography Enquiry"
+              />
+              <input
+                type="text"
+                name="_honey"
+                style="display:none"
+                tabindex="-1"
+                autocomplete="off"
+              />
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="first-name">First Name</label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="firstName"
+                    placeholder="Sophie"
+                    required
+                  />
+                </div>
+                <div class="form-field">
+                  <label for="last-name">Last Name</label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="lastName"
+                    placeholder="Laurent"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="sophie@email.com"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="(555) 000-0000"
+                />
+              </div>
+
+              <div class="package-selector">
+                <label>Session Type</label>
+                <div class="package-options">
+                  <div class="package-option">
+                    <input
+                      type="radio"
+                      id="p-portrait"
+                      name="sessionType"
+                      value="Portrait Session"
+                      checked
+                    />
+                    <label for="p-portrait">
+                      Portrait Session
+                      <span class="package-price">From $350</span>
+                    </label>
+                  </div>
+                  <div class="package-option">
+                    <input
+                      type="radio"
+                      id="p-engagement"
+                      name="sessionType"
+                      value="Engagement Session"
+                    />
+                    <label for="p-engagement">
+                      Engagement Session
+                      <span class="package-price">From $550</span>
+                    </label>
+                  </div>
+                  <div class="package-option">
+                    <input
+                      type="radio"
+                      id="p-wedding"
+                      name="sessionType"
+                      value="Wedding Day Coverage"
+                    />
+                    <label for="p-wedding">
+                      Wedding Day Coverage
+                      <span class="package-price">From $2,400</span>
+                    </label>
+                  </div>
+                  <div class="package-option">
+                    <input
+                      type="radio"
+                      id="p-family"
+                      name="sessionType"
+                      value="Family Session"
+                    />
+                    <label for="p-family">
+                      Family Session
+                      <span class="package-price">From $450</span>
+                    </label>
+                  </div>
+                  <div class="package-option">
+                    <input
+                      type="radio"
+                      id="p-editorial"
+                      name="sessionType"
+                      value="Editorial / Brand"
+                    />
+                    <label for="p-editorial">
+                      Editorial / Brand
+                      <span class="package-price">Custom quote</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="session-date">Preferred Date</label>
+                  <input
+                    type="date"
+                    id="session-date"
+                    name="preferredDate"
+                  />
+                </div>
+                <div class="form-field">
+                  <label for="location">Location / City</label>
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="New York, NY"
+                  />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="vision">Tell Us About Your Vision</label>
+                <textarea
+                  id="vision"
+                  name="vision"
+                  placeholder="Describe the mood, style, or story you have in mind..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="btn-book"
+                id="book-btn"
+              >
+                Send Enquiry
+              </button>
+
+              <p class="form-note">
+                Your information is kept private and never shared.
+                We respond to every enquiry personally.
+              </p>
+
+            </form>
+
+            <div class="form-success" id="booking-success">
+              <div class="success-line"></div>
+              <h3>Enquiry Received</h3>
+              <p>
+                Thank you for reaching out. We have received
+                your enquiry and will be in touch within
+                24 hours to discuss your vision and
+                confirm availability.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="section-eyebrow">What We Offer</div>
+      <h2 class="section-title">
+        Photography for every<br />
+        <em>chapter of life</em>
+      </h2>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-card-num">01</div>
+          <h3 class="service-card-title">Wedding Photography</h3>
+          <p class="service-card-desc">
+            Full day coverage of your wedding from
+            preparation through reception. Documentary
+            and fine art styles blended into a
+            timeless gallery you will treasure forever.
+          </p>
+          <div class="service-card-price">From $2,400</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-num">02</div>
+          <h3 class="service-card-title">Portrait Sessions</h3>
+          <p class="service-card-desc">
+            Individual, couple, and family portrait
+            sessions in studio or on location.
+            Relaxed, guided sessions that bring
+            out your natural presence.
+          </p>
+          <div class="service-card-price">From $350</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-num">03</div>
+          <h3 class="service-card-title">Engagement Sessions</h3>
+          <p class="service-card-desc">
+            Celebrate your engagement with a session
+            at a meaningful location. A beautiful way
+            to get comfortable in front of the camera
+            before your wedding day.
+          </p>
+          <div class="service-card-price">From $550</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-num">04</div>
+          <h3 class="service-card-title">Newborn and Family</h3>
+          <p class="service-card-desc">
+            Gentle, unhurried newborn sessions in the
+            first weeks of life. Family sessions at
+            home or in nature that capture your
+            family as it truly is.
+          </p>
+          <div class="service-card-price">From $450</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-num">05</div>
+          <h3 class="service-card-title">Editorial and Brand</h3>
+          <p class="service-card-desc">
+            Professional imagery for brands, campaigns,
+            and editorial projects. We collaborate
+            closely with creative directors to
+            bring your vision to life.
+          </p>
+          <div class="service-card-price">Custom quote</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-num">06</div>
+          <h3 class="service-card-title">Corporate Headshots</h3>
+          <p class="service-card-desc">
+            Clean, confident headshots for
+            professionals, teams, and LinkedIn
+            profiles. Studio and on-location
+            options available.
+          </p>
+          <div class="service-card-price">From $280</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="process-inner">
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-title" style="color: var(--white);">
+        A simple path to<br />
+        <em>beautiful images</em>
+      </h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-step-num">01</div>
+          <h3 class="process-step-title">Send Your Enquiry</h3>
+          <p class="process-step-desc">
+            Fill out the booking form with your
+            session type, preferred date, and a
+            little about your vision.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">02</div>
+          <h3 class="process-step-title">Discovery Call</h3>
+          <p class="process-step-desc">
+            We schedule a free 20-minute call
+            to get to know each other and
+            discuss every detail of your session.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">03</div>
+          <h3 class="process-step-title">Your Session Day</h3>
+          <p class="process-step-desc">
+            A relaxed, guided experience where
+            you feel at ease and every image
+            is crafted with intention.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">04</div>
+          <h3 class="process-step-title">Gallery Delivery</h3>
+          <p class="process-step-desc">
+            Your edited images delivered to a
+            private online gallery within
+            three to four weeks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-eyebrow">Kind Words</div>
+      <h2 class="section-title">
+        What our clients<br />
+        <em>say</em>
+      </h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Working with Lumiere Studio was the
+            best decision we made for our wedding.
+            The images are beyond anything we
+            imagined. Pure art.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">E</div>
+            <div>
+              <div class="author-name">Eleanor and James R.</div>
+              <div class="author-detail">Wedding, October 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            I was nervous about having my portrait
+            taken but the session felt completely
+            natural. I look at those photos every
+            day and feel genuinely proud of them.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Maya T.</div>
+              <div class="author-detail">Portrait Session, 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            The brand photography elevated our
+            entire visual identity. Clients
+            regularly comment on how professional
+            our imagery looks. Worth every penny.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">D</div>
+            <div>
+              <div class="author-name">David Chen</div>
+              <div class="author-detail">Brand Editorial, 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-eyebrow">Begin Your Story</div>
+    <h2>
+      Your story deserves<br />
+      to be <em>beautifully told.</em>
+    </h2>
+    <p>
+      Limited sessions available each month.
+      Reach out today to check availability.
+    </p>
+    <div class="cta-buttons">
+      <a href="#booking" class="btn-primary">
+        Book a Session
+      </a>
+      <a href="tel:+15550001234" class="btn-ghost">
+        Call (555) 000-1234
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">
+          Lumiere <span>Studio</span>
+        </div>
+        <div class="footer-brand-tagline">
+          Fine art photography for the moments
+          that matter most.
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-link-group">
+          <h4>Sessions</h4>
+          <ul>
+            <li><a href="#services">Weddings</a></li>
+            <li><a href="#services">Portraits</a></li>
+            <li><a href="#services">Engagements</a></li>
+            <li><a href="#services">Newborn</a></li>
+            <li><a href="#services">Editorial</a></li>
+          </ul>
+        </div>
+        <div class="footer-link-group">
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#booking">Book a Session</a></li>
+            <li><a href="tel:+15550001234">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 Lumiere Studio. All rights reserved.
+        Powered by <a href="https://formgrid.dev">Formgrid</a>.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('booking-form');
+    const btn = document.getElementById('book-btn');
+    const success = document.getElementById('booking-success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const firstName = form.querySelector(
+        '[name="firstName"]'
+      ).value;
+
+      const sessionType = form.querySelector(
+        'input[name="sessionType"]:checked'
+      );
+
+      document.getElementById('booking-subject').value =
+        `Photography Enquiry - ${firstName} - ${
+          sessionType ? sessionType.value : 'General'
+        }`;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending Enquiry...';
+
+      try {
+        const res = await fetch(
+          'YOUR_FORMGRID_ENDPOINT_URL',
+          {
+            method: 'POST',
+            body: new FormData(form)
+          }
+        );
+
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Send Enquiry';
+          alert(
+            'Something went wrong. Please try again or call us directly.'
+          );
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send Enquiry';
+        alert(
+          'Network error. Please try again.'
+        );
+      }
+    });
+  </script>
+
+</body>
+</html>
