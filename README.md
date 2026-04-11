@@ -4,16 +4,27 @@ Free, professional HTML templates for
 collecting form submissions. Powered by
 Formgrid.dev — no backend required.
 
+**Live site (GitHub Pages):** [allenarduino.github.io/formgrid-examples](https://allenarduino.github.io/formgrid-examples/)
+
 ## Industry Templates
+
+Click a template name or preview image to open the live page.
 
 | Template | Preview | Description |
 |---|---|---|
-| [Plumber](./industries/plumber) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/plumber/preview.png) | Service request and quote form |
-| [Photographer](./industries/photographer) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/photographer/preview.png) | Booking and package selection |
-| [Cleaning Service](./industries/cleaning-service) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/cleaning-service/preview.png) | Appointment and service form |
-| [Real Estate](./industries/real-estate) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/real-estate/preview.png) | Property enquiry form |
+| [Plumber](https://allenarduino.github.io/formgrid-examples/industries/plumber/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/plumber/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/plumber/) | Service request and quote form |
+| [Photographer](https://allenarduino.github.io/formgrid-examples/industries/photographer/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/photographer/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/photographer/) | Booking and package selection |
+| [Cleaning Service](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/cleaning-service/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/) | Appointment and service form |
+| [Real Estate](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/real-estate/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | Property enquiry form |
 
+**Direct links**
 
+- [Plumber — live](https://allenarduino.github.io/formgrid-examples/industries/plumber/)
+- [Photographer — live](https://allenarduino.github.io/formgrid-examples/industries/photographer/)
+- [Cleaning Service — live](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/)
+- [Real Estate — live](https://allenarduino.github.io/formgrid-examples/industries/real-estate/)
+
+Source files live under [`industries/`](./industries/) in this repo.
 
 ## How to Use Any Template
 
