@@ -32,6 +32,9 @@
 
     html {
       scroll-behavior: smooth;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     body {
@@ -39,7 +42,9 @@
       background: var(--cream);
       color: var(--text);
       line-height: 1.6;
+      max-width: 100%;
       overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* ============ NAVIGATION ============ */
@@ -54,6 +59,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      max-width: 100%;
       background: rgba(12, 27, 46, 0.96);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(200, 151, 58, 0.2);
@@ -138,6 +144,7 @@
 
     .hero {
       min-height: 100vh;
+      min-width: 0;
       background: var(--navy);
       display: flex;
       align-items: center;
@@ -185,6 +192,7 @@
 
     .hero-content {
       flex: 1;
+      min-width: 0;
       max-width: 700px;
       padding: 0;
       position: relative;
@@ -228,6 +236,7 @@
       line-height: 1.1;
       margin-bottom: 24px;
       letter-spacing: -0.01em;
+      overflow-wrap: break-word;
     }
 
     .hero h1 em {
@@ -280,6 +289,8 @@
     .hero-form-panel {
       flex-shrink: 0;
       width: 440px;
+      max-width: 100%;
+      min-width: 0;
       padding: 0;
       position: relative;
       z-index: 2;
@@ -381,7 +392,7 @@
 
     .form-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 12px;
     }
 
@@ -401,7 +412,7 @@
 
     .service-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 8px;
     }
 
@@ -700,7 +711,7 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 2px;
       background: var(--border);
       border-radius: var(--radius-lg);
@@ -794,7 +805,7 @@
       padding: 100px 80px;
       background: var(--navy);
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 80px;
       align-items: center;
     }
@@ -935,7 +946,7 @@
 
     .why-stats-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 12px;
       margin-top: 12px;
     }
@@ -982,7 +993,7 @@
 
     .steps-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 2px;
       position: relative;
     }
@@ -1142,10 +1153,11 @@
       background: #080f1a;
       padding: 48px 80px;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 32px;
       border-top: 1px solid rgba(255,255,255,0.06);
+      min-width: 0;
     }
 
     .footer-brand {
@@ -1172,7 +1184,10 @@
 
     .footer-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 32px;
+      justify-content: flex-end;
+      min-width: 0;
     }
 
     .footer-links a {
@@ -1196,18 +1211,11 @@
 
     /* ============ RESPONSIVE ============ */
 
-    @media (max-width: 1024px) {
-      nav {
-        padding: 18px 32px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
+    /* Side-by-side hero needs ~1.3k+ px; stack earlier to avoid horizontal overflow */
+    @media (max-width: 1280px) {
       .hero {
         flex-direction: column;
-        padding: 100px 32px 60px;
+        padding: 100px 40px 60px;
         gap: 40px;
       }
 
@@ -1228,6 +1236,20 @@
         width: 100%;
         max-width: 480px;
       }
+    }
+
+    @media (max-width: 1024px) {
+      nav {
+        padding: 18px 32px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 100px 32px 60px;
+      }
 
       .services,
       .how-it-works,
@@ -1236,7 +1258,7 @@
       }
 
       .services-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       }
 
       .why-us {
@@ -1246,7 +1268,7 @@
       }
 
       .steps-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         gap: 12px;
       }
 
