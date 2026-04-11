@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meridian Residential — Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f7f4ee;
+      --paper-deep: #ebe6dc;
+      --white: #ffffff;
+      --ink: #1c222c;
+      --ink-soft: #3d4656;
+      --muted: #6b7280;
+      --brass: #b8956e;
+      --brass-light: #c9a882;
+      --brass-pale: #f0e8dc;
+      --border: #e0d9cc;
+      --radius: 8px;
+      --radius-lg: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.65;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-fade-up { animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .anim-delay-1 { animation-delay: 0.1s; }
+    .anim-delay-2 { animation-delay: 0.22s; }
+    .anim-delay-3 { animation-delay: 0.38s; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 72px;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      background: rgba(28, 34, 44, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(184, 149, 110, 0.15);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--brass);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg {
+      width: 18px; height: 18px;
+      stroke: var(--brass-light);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .logo-name span { color: var(--brass-light); font-style: italic; font-weight: 500; }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-menu a:hover { color: var(--brass-light); }
+
+    .nav-btn {
+      padding: 10px 22px;
+      border: 1.5px solid var(--brass);
+      color: var(--brass-light) !important;
+      border-radius: var(--radius);
+      font-size: 0.78rem !important;
+      font-weight: 600 !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-btn:hover {
+      background: var(--brass);
+      color: var(--ink) !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding-top: 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: linear-gradient(165deg, #1a2130 0%, #141a24 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px 72px 72px;
+      position: relative;
+      min-width: 0;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image:
+        repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 0, transparent 72px),
+        repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 0, transparent 72px);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -80px;
+      right: -100px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(184,149,110,0.12) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow-line {
+      width: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--brass), transparent);
+    }
+
+    .hero-eyebrow-text {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brass-light);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.75rem, 4.2vw, 4rem);
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      overflow-wrap: break-word;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--brass-light);
+      font-weight: 500;
+    }
+
+    .hero-desc {
+      font-size: 1.02rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.52);
+      max-width: 400px;
+      line-height: 1.85;
+      margin-bottom: 44px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-counters {
+      display: flex;
+      gap: 36px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-counter { display: flex; flex-direction: column; gap: 6px; }
+
+    .counter-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .counter-num span { color: var(--brass-light); font-size: 1.6rem; }
+
+    .counter-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .counter-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+      align-self: stretch;
+    }
+
+    /* HERO FORM */
+    .hero-right {
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 56px 56px 48px;
+      position: relative;
+      min-width: 0;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--brass), transparent);
+      opacity: 0.35;
+    }
+
+    .form-panel {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .form-panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .form-panel-sub {
+      font-size: 0.86rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 26px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+    }
+
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .field textarea {
+      min-height: 88px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--brass);
+      box-shadow: 0 0 0 3px rgba(184, 149, 110, 0.12);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .inq-row { margin-bottom: 14px; }
+
+    .inq-row > label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    .inq-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .inq-tab { position: relative; flex: 1; min-width: calc(50% - 4px); }
+
+    .inq-tab input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .inq-tab label {
+      display: block;
+      text-align: center;
+      padding: 9px 8px;
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.15s;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .inq-tab input:checked + label {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .ptype-wrap { margin-bottom: 14px; }
+
+    .ptype-wrap > label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    .checks-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    .check-opt { position: relative; }
+
+    .check-opt input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .check-opt label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: 0;
+      transition: all 0.15s;
+      line-height: 1.3;
+    }
+
+    .check-opt input:checked + label {
+      background: var(--brass-pale);
+      border-color: var(--brass);
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .chk-box {
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      transition: all 0.15s;
+      background: var(--white);
+    }
+
+    .check-opt input:checked + label .chk-box {
+      background: var(--brass);
+      border-color: var(--brass);
+    }
+
+    .check-opt input:checked + label .chk-box::after {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 5px;
+      border-left: 1.5px solid white;
+      border-bottom: 1.5px solid white;
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--brass);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover { background: var(--brass-light); }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .form-reassure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .form-reassure svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--brass);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 36px 16px;
+    }
+
+    .success-ring {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--brass);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+    }
+
+    .success-ring svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--brass);
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .form-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .form-success p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* TICKER */
+    .ticker {
+      background: var(--ink);
+      padding: 14px 0;
+      overflow: hidden;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 32s linear infinite;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 36px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      white-space: nowrap;
+    }
+
+    .ticker-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--brass);
+      border-radius: 50%;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    /* PHOTO STRIP */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      height: 240px;
+    }
+
+    .photo-strip-cell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-strip-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.88);
+      transition: transform 8s ease, filter 0.4s;
+    }
+
+    .photo-strip-cell:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.95);
+    }
+
+    .strip-label-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .photo-strip-cell:hover .strip-label-wrap { opacity: 1; }
+
+    .strip-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    /* SERVICES */
+    .services {
+      padding: 96px 72px;
+      background: var(--white);
+    }
+
+    .services-inner { max-width: 1120px; margin: 0 auto; }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 12px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--brass);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.15;
+      max-width: 480px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--brass);
+    }
+
+    .section-desc {
+      font-size: 0.98rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 380px;
+      line-height: 1.8;
+    }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .svc-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .svc-card:hover {
+      box-shadow: 0 24px 48px rgba(28, 34, 44, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .svc-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .svc-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .svc-body { padding: 28px 26px 30px; }
+
+    .svc-num {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 10px;
+    }
+
+    .svc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .svc-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--brass);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .svc-link:hover { color: var(--brass); }
+
+    .svc-link svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* PROOF */
+    .proof {
+      padding: 88px 72px;
+      background: var(--paper);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .proof-visual {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .proof-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .proof-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: var(--white);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    }
+
+    .proof-badge strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .proof-badge span {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .proof-content .section-title { margin-bottom: 16px; }
+
+    .proof-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .proof-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .proof-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--brass-pale);
+      border: 1px solid rgba(184,149,110,0.25);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .proof-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--brass);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .proof-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .proof-item strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.92rem;
+    }
+
+    /* HOW */
+    .how {
+      padding: 96px 72px;
+      background: var(--white);
+    }
+
+    .how-inner { max-width: 1040px; margin: 0 auto; }
+
+    .how .section-head { justify-content: center; text-align: center; margin-bottom: 56px; }
+
+    .how .section-head .section-desc { margin: 0 auto; }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .step-card {
+      padding: 32px 24px;
+      background: var(--paper);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--brass), #8a6b4a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .step-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* REVIEWS */
+    .reviews {
+      padding: 96px 72px;
+      background: var(--ink);
+    }
+
+    .reviews-inner { max-width: 1120px; margin: 0 auto; }
+
+    .reviews .eyebrow { color: var(--brass-light); }
+    .reviews .eyebrow::before { background: var(--brass-light); }
+
+    .reviews-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+      align-items: end;
+    }
+
+    .reviews .section-title { color: var(--white); max-width: 420px; }
+
+    .reviews .section-desc { color: rgba(255,255,255,0.45); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 28px 26px;
+    }
+
+    .review-meta {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brass-light);
+      margin-bottom: 14px;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rv-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(184,149,110,0.2);
+      display: grid;
+      place-items: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--brass-light);
+    }
+
+    .rv-name { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+    .rv-detail { font-size: 0.74rem; color: rgba(255,255,255,0.35); }
+
+    /* CTA */
+    .cta-band {
+      padding: 88px 72px;
+      background: var(--paper-deep);
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .cta-band h2 em { font-style: italic; color: var(--brass); }
+
+    .cta-band p {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.75;
+    }
+
+    .cta-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-solid {
+      padding: 14px 32px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+    }
+
+    .btn-solid:hover { background: #2a3140; }
+
+    .btn-line {
+      padding: 14px 32px;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-line:hover {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #12161d;
+      padding: 56px 72px 28px;
+      border-top: 1px solid rgba(184,149,110,0.12);
+    }
+
+    .footer-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-about .logo-name { font-size: 1.25rem; }
+
+    .footer-tagline {
+      margin-top: 14px;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.38);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass-light);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+
+    .footer-copy {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.22);
+      font-weight: 300;
+    }
+
+    .footer-copy a {
+      color: var(--brass-light);
+      text-decoration: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      nav { padding: 0 28px; }
+      .nav-menu { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+
+      .hero-left {
+        padding: 56px 32px 44px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .hero-eyebrow { justify-content: center; }
+      .hero-desc { margin: 0 auto 36px; }
+      .hero-counters { justify-content: center; }
+
+      .hero-right {
+        padding: 44px 32px 64px;
+      }
+
+      .hero-right::before { display: none; }
+
+      .photo-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        height: 200px;
+      }
+
+      .photo-strip-cell:nth-child(4),
+      .photo-strip-cell:nth-child(5) { display: none; }
+
+      .services,
+      .proof,
+      .how,
+      .reviews,
+      .cta-band {
+        padding: 64px 32px;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-desc { text-align: left; max-width: 100%; }
+
+      .svc-grid { grid-template-columns: 1fr; }
+
+      .proof {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .how-steps {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .reviews-header { grid-template-columns: 1fr; }
+
+      .reviews-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .footer-about { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.35rem; }
+      .counter-divider { display: none; }
+
+      .how-steps,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-row,
+      .checks-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .inq-tab { min-width: 100%; }
+
+      .cta-btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <span class="logo-name">Meridian <span>Residential</span></span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="#listings">Listings</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#enquiry" class="nav-btn">Schedule a Call</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="enquiry">
+    <div class="hero-left">
+      <div class="hero-glow"></div>
+      <div class="hero-eyebrow anim-fade-up">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Luxury Real Estate Advisory</span>
+      </div>
+      <h1 class="anim-fade-up anim-delay-1">
+        The right address,<br />
+        <em>at the right moment.</em>
+      </h1>
+      <p class="hero-desc anim-fade-up anim-delay-2">
+        Boutique representation for buyers and sellers who expect discretion,
+        data-backed pricing, and white-glove service from first tour to closing.
+      </p>
+      <div class="hero-counters anim-fade-up anim-delay-3">
+        <div class="hero-counter">
+          <div class="counter-num">$2.1<span>B</span></div>
+          <div class="counter-label">Closed Volume</div>
+        </div>
+        <div class="counter-divider"></div>
+        <div class="hero-counter">
+          <div class="counter-num">480<span>+</span></div>
+          <div class="counter-label">Transactions</div>
+        </div>
+        <div class="counter-divider"></div>
+        <div class="hero-counter">
+          <div class="counter-num">18<span> yrs</span></div>
+          <div class="counter-label">In the Market</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="form-panel">
+        <h2 class="form-panel-title">Property Enquiry</h2>
+        <p class="form-panel-sub">A senior advisor replies within one business day.</p>
+
+        <form id="estate-form">
+          <input type="hidden" name="_subject" id="estate-subject" value="New Property Enquiry" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="field-row">
+            <div class="field">
+              <label for="fn">First Name</label>
+              <input type="text" id="fn" name="firstName" placeholder="Alex" required />
+            </div>
+            <div class="field">
+              <label for="ln">Last Name</label>
+              <input type="text" id="ln" name="lastName" placeholder="Rivera" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="em">Email</label>
+            <input type="email" id="em" name="email" placeholder="alex@email.com" required />
+          </div>
+
+          <div class="field">
+            <label for="ph">Phone</label>
+            <input type="tel" id="ph" name="phone" placeholder="(555) 000-0000" required />
+          </div>
+
+          <div class="inq-row">
+            <label>I am looking to</label>
+            <div class="inq-tabs">
+              <div class="inq-tab">
+                <input type="radio" id="iq1" name="inquiryType" value="Buy" checked />
+                <label for="iq1">Buy</label>
+              </div>
+              <div class="inq-tab">
+                <input type="radio" id="iq2" name="inquiryType" value="Sell" />
+                <label for="iq2">Sell</label>
+              </div>
+              <div class="inq-tab">
+                <input type="radio" id="iq3" name="inquiryType" value="Rent" />
+                <label for="iq3">Rent</label>
+              </div>
+              <div class="inq-tab">
+                <input type="radio" id="iq4" name="inquiryType" value="Invest" />
+                <label for="iq4">Invest</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="ptype-wrap">
+            <label>Property focus</label>
+            <div class="checks-grid">
+              <div class="check-opt">
+                <input type="checkbox" id="pt1" name="ptype_single" value="Single-family" checked />
+                <label for="pt1"><span class="chk-box"></span>Single-family</label>
+              </div>
+              <div class="check-opt">
+                <input type="checkbox" id="pt2" name="ptype_condo" value="Condo" />
+                <label for="pt2"><span class="chk-box"></span>Condo</label>
+              </div>
+              <div class="check-opt">
+                <input type="checkbox" id="pt3" name="ptype_multi" value="Multi-unit" />
+                <label for="pt3"><span class="chk-box"></span>Multi-unit</label>
+              </div>
+              <div class="check-opt">
+                <input type="checkbox" id="pt4" name="ptype_land" value="Land" />
+                <label for="pt4"><span class="chk-box"></span>Land</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="budget">Budget range</label>
+              <select id="budget" name="budgetRange">
+                <option>Under $500k</option>
+                <option selected>$500k to $1M</option>
+                <option>$1M to $2.5M</option>
+                <option>$2.5M to $5M</option>
+                <option>$5M+</option>
+                <option>Prefer to discuss</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="time">Timeline</label>
+              <select id="time" name="timeline">
+                <option>Immediately</option>
+                <option selected>1 to 3 months</option>
+                <option>3 to 6 months</option>
+                <option>6+ months</option>
+                <option>Just exploring</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="areas">Preferred neighborhoods or ZIP codes</label>
+            <input type="text" id="areas" name="preferredAreas" placeholder="e.g. Northside, 90210" />
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="message" placeholder="Tell us about your goals, must-haves, or a specific property."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="estate-submit">Submit Enquiry</button>
+
+          <div class="form-reassure">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Confidential. No spam. We never share your details.
+          </div>
+        </form>
+
+        <div class="form-success" id="estate-success">
+          <div class="success-ring">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Thank You</h3>
+          <p>
+            Your enquiry has been received. A Meridian advisor will
+            reach out within one business day.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="ticker-dot"></span>Licensed Brokerage</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>MLS Partner</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Off-Market Access</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Private Showings</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Global Referral Network</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Concierge Closing</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Licensed Brokerage</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>MLS Partner</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Off-Market Access</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Private Showings</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Global Referral Network</div>
+      <div class="ticker-item"><span class="ticker-dot"></span>Concierge Closing</div>
+    </div>
+  </div>
+
+  <div class="photo-strip" id="listings">
+    <div class="photo-strip-cell">
+      <img src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Modern architecture" loading="lazy" />
+      <div class="strip-label-wrap"><span class="strip-label">New Build</span></div>
+    </div>
+    <div class="photo-strip-cell">
+      <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Luxury home exterior" loading="lazy" />
+      <div class="strip-label-wrap"><span class="strip-label">Estate</span></div>
+    </div>
+    <div class="photo-strip-cell">
+      <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Living space" loading="lazy" />
+      <div class="strip-label-wrap"><span class="strip-label">Interior</span></div>
+    </div>
+    <div class="photo-strip-cell">
+      <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Penthouse view" loading="lazy" />
+      <div class="strip-label-wrap"><span class="strip-label">Penthouse</span></div>
+    </div>
+    <div class="photo-strip-cell">
+      <img src="https://images.pexels.com/photos/534220/pexels-photo-534220.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Waterfront" loading="lazy" />
+      <div class="strip-label-wrap"><span class="strip-label">Waterfront</span></div>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">How We Help</div>
+          <h2 class="section-title">Guidance at every stage of the <em>transaction.</em></h2>
+        </div>
+        <p class="section-desc">
+          Whether you are upgrading, downsizing, or building a portfolio,
+          we align strategy with your timeline and financial goals.
+        </p>
+      </div>
+
+      <div class="svc-grid">
+        <article class="svc-card">
+          <div class="svc-img">
+            <img src="https://images.pexels.com/photos/534228/pexels-photo-534228.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Buying a home" loading="lazy" />
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">For Buyers</div>
+            <h3 class="svc-title">Acquisition</h3>
+            <p class="svc-desc">
+              Curated tours, comparative market analysis, and negotiation
+              backed by recent comps and off-market intelligence.
+            </p>
+            <a href="#enquiry" class="svc-link">
+              Start your search
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+        <article class="svc-card">
+          <div class="svc-img">
+            <img src="https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Selling a home" loading="lazy" />
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">For Sellers</div>
+            <h3 class="svc-title">Listing Strategy</h3>
+            <p class="svc-desc">
+              Staging partners, photography, targeted marketing, and pricing
+              strategy designed to maximize qualified offers.
+            </p>
+            <a href="#enquiry" class="svc-link">
+              List with us
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+        <article class="svc-card">
+          <div class="svc-img">
+            <img src="https://images.pexels.com/photos/3787839/pexels-photo-3787839.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Urban multifamily and investment properties" loading="lazy" />
+          </div>
+          <div class="svc-body">
+            <div class="svc-num">For Investors</div>
+            <h3 class="svc-title">Portfolio Growth</h3>
+            <p class="svc-desc">
+              Yield modeling, 1031 coordination, and access to multifamily
+              and development opportunities through our partner network.
+            </p>
+            <a href="#enquiry" class="svc-link">
+              Speak with advisory
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="proof-visual">
+      <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Property exterior" loading="lazy" />
+      <div class="proof-badge">
+        <strong>$4.2M</strong>
+        <span>Record sale, Riverside Quarter</span>
+      </div>
+    </div>
+    <div class="proof-content">
+      <div class="eyebrow">Why Meridian</div>
+      <h2 class="section-title">Local expertise with <em>institutional rigor.</em></h2>
+      <div class="proof-list">
+        <div class="proof-item">
+          <div class="proof-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p>
+            <strong>Verified data</strong>
+            Every recommendation is supported by live MLS feeds, tax records,
+            and proprietary sales history we maintain in-house.
+          </p>
+        </div>
+        <div class="proof-item">
+          <div class="proof-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <p>
+            <strong>Responsive team</strong>
+            Same-day callbacks, evening and weekend showings, and a dedicated
+            transaction coordinator from offer to keys.
+          </p>
+        </div>
+        <div class="proof-item">
+          <div class="proof-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p>
+            <strong>Trusted network</strong>
+            Attorneys, lenders, inspectors, and designers we have vetted
+            across hundreds of closed deals.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="process">
+    <div class="how-inner">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Process</div>
+          <h2 class="section-title">Four steps. <em>One aligned outcome.</em></h2>
+        </div>
+        <p class="section-desc">
+          Transparent milestones so you always know what comes next.
+        </p>
+      </div>
+      <div class="how-steps">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-title">Discovery</div>
+          <div class="step-desc">Goals, financing, and market education in a single strategy session.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-title">Search or Prep</div>
+          <div class="step-desc">Curated inventory or listing prep with staging and pricing analysis.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-title">Offer and diligence</div>
+          <div class="step-desc">Negotiation, inspections, and contingency management handled end-to-end.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-title">Closing</div>
+          <div class="step-desc">Title, walkthrough, and handoff with post-close support.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <div class="reviews-inner">
+      <div class="reviews-header">
+        <div>
+          <div class="eyebrow">Client voices</div>
+          <h2 class="section-title">Relationships built on <em>trust and results.</em></h2>
+        </div>
+        <p class="section-desc">
+          A selection of feedback from buyers and sellers who worked with our senior team.
+        </p>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-meta">Verified client</div>
+          <p class="review-text">
+            They secured an off-market listing before it hit the open market.
+            We closed under ask with a two-week contingency. Unmatched professionalism.
+          </p>
+          <div class="review-author">
+            <div class="rv-avatar">C</div>
+            <div>
+              <div class="rv-name">Christina V.</div>
+              <div class="rv-detail">Buyer, 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">Verified client</div>
+          <p class="review-text">
+            Our home sold in nine days above list. The marketing package looked
+            editorial. Every vendor they recommended showed up on time.
+          </p>
+          <div class="review-author">
+            <div class="rv-avatar">M</div>
+            <div>
+              <div class="rv-name">Marcus T.</div>
+              <div class="rv-detail">Seller, 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-meta">Verified client</div>
+          <p class="review-text">
+            As an out-of-state investor I relied on them entirely. Video tours,
+            pro forma reviews, and a smooth 1031 exchange. I will use Meridian again.
+          </p>
+          <div class="review-author">
+            <div class="rv-avatar">L</div>
+            <div>
+              <div class="rv-name">Leah K.</div>
+              <div class="rv-detail">Investor, 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <h2>Ready when <em>you</em> are.</h2>
+    <p>
+      Share your brief. We will match you with an advisor who specializes
+      in your price segment and neighborhood.
+    </p>
+    <div class="cta-btns">
+      <a href="#enquiry" class="btn-solid">Submit an enquiry</a>
+      <a href="tel:+15550001234" class="btn-line">Call (555) 000-1234</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#" class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <span class="logo-name">Meridian <span>Residential</span></span>
+        </a>
+        <p class="footer-tagline">
+          Luxury real estate advisory serving discerning clients since 2008.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#listings">Featured homes</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#enquiry">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Office</h4>
+        <ul>
+          <li><a href="tel:+15550001234">(555) 000-1234</a></li>
+          <li><a href="mailto:hello@meridian.example">hello@meridian.example</a></li>
+          <li><span style="color:rgba(255,255,255,0.35);font-size:0.84rem;">100 Harbor View, Suite 400</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; 2026 Meridian Residential. All rights reserved.
+        Powered by <a href="https://formgrid.dev">Formgrid</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('estate-form');
+    const btn = document.getElementById('estate-submit');
+    const succ = document.getElementById('estate-success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const firstName = form.querySelector('[name="firstName"]').value;
+      const inquiry = form.querySelector('input[name="inquiryType"]:checked');
+      const budget = form.querySelector('[name="budgetRange"]').value;
+
+      document.getElementById('estate-subject').value =
+        `Property Enquiry - ${firstName} - ${inquiry ? inquiry.value : 'Buy'} - ${budget}`;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('YOUR_FORMGRID_ENDPOINT_URL', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          succ.style.display = 'block';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Submit Enquiry';
+          alert('Something went wrong. Please try again or call us.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Submit Enquiry';
+        alert('Network error. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

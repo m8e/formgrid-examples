@@ -11,7 +11,7 @@ Formgrid.dev — no backend required.
 | [Plumber](./industries/plumber) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/plumber/preview.png) | Service request and quote form |
 | [Photographer](./industries/photographer) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/photographer/preview.png) | Booking and package selection |
 | [Cleaning Service](./industries/cleaning-service) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/cleaning-service/preview.png) | Appointment and service form |
-| [Real Estate](./industries/real-estate) | ![preview](./industries/real-estate/preview.png) | Property enquiry form |
+| [Real Estate](./industries/real-estate) | ![preview](https://github.com/allenarduino/formgrid-examples/blob/main/industries/real-estate/preview.png) | Property enquiry form |
 
 
 
