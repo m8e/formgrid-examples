@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>EquiRegister | Equestrian Event Registration Form Template</title>
+  <meta name="description" content="A complete equestrian event registration template for horse shows, riding clubs, and endurance rides with class selection, stall reservations, waivers, and real-time fee totals." />
+  <link rel="canonical" href="https://formgrid.dev/templates/equestrian-registration" />
+  <meta property="og:title" content="EquiRegister | Equestrian Event Registration Form Template" />
+  <meta property="og:description" content="Collect rider details, horse info, class entries, stall reservations, emergency contacts, and waivers in one digital form." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://formgrid.dev/templates/equestrian-registration" />
+  <meta property="og:image" content="https://images.pexels.com/photos/3343894/pexels-photo-3343894.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EquiRegister | Equestrian Event Registration Form Template" />
+  <meta name="twitter:description" content="Digital horse show registration with dynamic fees, stall logic, and integrated waiver collection." />
+  <meta name="twitter:image" content="https://images.pexels.com/photos/3343894/pexels-photo-3343894.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* --------------------------------------------
+       RESET & GLOBAL VARIABLES
+    -------------------------------------------- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --sage: #7c8e6e;
+      --sage-light: #a1b38b;
+      --sage-pale: #eef3e7;
+      --forest: #2c4a2e;
+      --earth: #5e4b3c;
+      --charcoal: #2c2c2a;
+      --gray-light: #f8f7f4;
+      --gray-border: #e2e0da;
+      --white: #ffffff;
+      --black: #1a1a18;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.06);
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Helvetica, sans-serif;
+      background-color: var(--gray-light);
+      color: var(--charcoal);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      color: var(--forest);
+    }
+
+    .section-subhead {
+      font-size: 1.1rem;
+      color: #5a6e4a;
+      max-width: 600px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background: #1e3a21;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--sage);
+      color: var(--forest);
+    }
+
+    .btn-outline:hover {
+      background: var(--sage-pale);
+      border-color: var(--sage-light);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--sage);
+      outline-offset: 2px;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid var(--gray-border);
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--forest);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--sage);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    /* Hero Section - Enhanced */
+    .hero {
+      padding-top: 120px;
+      padding-bottom: 80px;
+      background: linear-gradient(135deg, #fefcf7 0%, #f3f5ef 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -15%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(124, 142, 110, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.2;
+      color: var(--forest);
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #4a5b3e;
+      margin-bottom: 28px;
+      max-width: 480px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--sage-pale);
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--forest);
+      margin-bottom: 24px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-stat-number {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--forest);
+    }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--earth);
+      font-weight: 600;
+    }
+
+    .hero-image {
+      background-color: #d9e2d2;
+      background-image: url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1400&q=80');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 32px;
+      min-height: 380px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(44, 74, 46, 0.1) 0%, transparent 60%);
+      border-radius: 32px;
+      pointer-events: none;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      padding: 32px 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--sage-pale);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--forest);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--forest);
+    }
+
+    .feature-card p {
+      font-size: 0.85rem;
+      color: #5c5c56;
+      line-height: 1.55;
+    }
+
+    /* How It Works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .step {
+      text-align: center;
+      background: var(--white);
+      padding: 36px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-border);
+      transition: box-shadow 0.2s;
+    }
+
+    .step:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--sage-pale);
+      color: var(--forest);
+      font-size: 1.6rem;
+      font-weight: 700;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Instrument Serif', serif;
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      font-size: 0.85rem;
+      color: #5c5c56;
+    }
+
+    /* Registration Form Card */
+    .form-section {
+      background: var(--white);
+      border-radius: 28px;
+      box-shadow: var(--shadow-md);
+      padding: 44px 40px;
+      margin: 40px 0 60px;
+      border: 1px solid var(--gray-border);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 32px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--earth);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 14px;
+      border: 1.5px solid var(--gray-border);
+      border-radius: var(--radius-sm);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      background: var(--gray-light);
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(124, 142, 110, 0.1);
+    }
+
+    .radio-group-inline {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .radio-group-inline label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: normal;
+      text-transform: none;
+      font-size: 0.85rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: normal;
+      text-transform: none;
+      font-size: 0.85rem;
+    }
+
+    .fee-summary {
+      background: var(--sage-pale);
+      padding: 20px 28px;
+      border-radius: var(--radius-sm);
+      margin: 24px 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .total-fee {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--forest);
+      font-family: 'Instrument Serif', serif;
+    }
+
+    .submit-btn {
+      width: min(100%, 380px);
+      background: var(--forest);
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .submit-btn[aria-busy="true"] {
+      cursor: wait;
+    }
+
+    .form-status {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: #7a2f2f;
+      min-height: 22px;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+      background: var(--white);
+      padding: 36px 40px;
+      border-radius: var(--radius-md);
+      border-left: 6px solid var(--sage);
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      color: #bbb9ae;
+      padding: 56px 0 28px;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-content a {
+      color: var(--sage-light);
+      text-decoration: none;
+    }
+
+    /* Utility */
+    .text-center {
+      text-align: center;
+    }
+
+    .stall-hidden {
+      display: none;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--gray-border);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid, .features-grid, .steps-grid, .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .full-width {
+        grid-column: span 1;
+      }
+      .form-section {
+        padding: 28px 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .section {
+        padding: 56px 0;
+      }
+      .hero-stats {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 20px;
+      }
+      .submit-btn {
+        width: 100%;
+      }
+      .fee-summary {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .testimonial-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo">Equi<span>Register</span></a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#registration" class="btn btn-outline" style="padding: 8px 20px;">Register now</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero Section - Enhanced with stats and badge -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Trusted by 200+ equestrian events</span>
+        </div>
+        <h1>Horse Show Registration <br>Made Simple</h1>
+        <p>Collect rider entries, stall reservations, and waivers in one organized flow. No paper. No chaos.</p>
+        <a href="#registration" class="btn btn-primary">Register Your Horse Now →</a>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hero-stat-number">15k+</span><span class="hero-stat-label">Entries Processed</span></div>
+          <div class="hero-stat"><span class="hero-stat-number">98%</span><span class="hero-stat-label">Organizer Satisfaction</span></div>
+          <div class="hero-stat"><span class="hero-stat-number">24/7</span><span class="hero-stat-label">Online Access</span></div>
+        </div>
+      </div>
+      <div class="hero-image" aria-label="Horse jumping in competition"></div>
+    </div>
+  </section>
+
+  <!-- Features Section (3 columns with SVG icons) -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Everything you need to manage entries</h2>
+        <p class="section-subhead" style="margin: 0 auto;">Streamlined registration that organizers and riders love.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+              <polyline points="22,7 12,13 2,7"/>
+            </svg>
+          </div>
+          <h3>Organized Email Notifications</h3>
+          <p>Each submission sends a clean, structured email to your event manager, ready to review or export.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+          </div>
+          <h3>Rider & Horse Management</h3>
+          <p>Collect everything: rider details, horse info, class selection, emergency contacts, all in one place.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Built-in Waivers & Releases</h3>
+          <p>Digital liability waivers with e-signature capability. Protect your event with legally sound acknowledgments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section" style="background: var(--sage-pale);">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-subhead" style="margin: 0 auto;">Three steps to stress-free registration</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step"><div class="step-number">1</div><h3>Share the Link</h3><p>Give riders your custom registration URL from Formgrid, embed anywhere.</p></div>
+        <div class="step"><div class="step-number">2</div><h3>Riders Register</h3><p>They fill out the form in 3-5 minutes on any device.</p></div>
+        <div class="step"><div class="step-number">3</div><h3>You Get Organized Data</h3><p>Clean emails arrive in your inbox, ready to review, print, or share with stewards.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form Section -->
+  <div class="container" id="registration">
+    <div class="form-section">
+      <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Event Registration Form</h2>
+      <p style="color: #5c5c56; margin-bottom: 32px;">All fields marked * are required.</p>
+
+      <form id="horse-show-form" action="https://formgrid.dev/api/f/YOUR_ENDPOINT_ID" method="POST">
+        <!-- Formgrid configuration: replace YOUR_ENDPOINT_ID with your actual Formgrid endpoint ID -->
+        <input type="hidden" name="_subject" id="dynamic-subject" value="New Horse Show Registration" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="form-grid">
+          <!-- Rider Information -->
+          <div class="full-width"><h3 style="font-family: 'Instrument Serif'; margin: 12px 0 4px;">Rider Information</h3><hr style="margin-bottom: 16px;"></div>
+          <div class="form-group"><label for="rider-full-name">Full name *</label><input id="rider-full-name" type="text" name="riderFullName" required placeholder="Alex Morgan" autocomplete="name" /></div>
+          <div class="form-group"><label for="rider-address">Address *</label><input id="rider-address" type="text" name="riderAddress" required placeholder="Street, City, ZIP" autocomplete="street-address" /></div>
+          <div class="form-group"><label for="rider-phone">Phone *</label><input id="rider-phone" type="tel" name="riderPhone" required placeholder="(555) 123-4567" autocomplete="tel" inputmode="tel" /></div>
+          <div class="form-group"><label for="rider-email">Email *</label><input id="rider-email" type="email" name="riderEmail" required placeholder="rider@example.com" autocomplete="email" /></div>
+          <div class="form-group"><label for="usef-number">USEF/USDF Number (optional)</label><input id="usef-number" type="text" name="usefNumber" placeholder="USEF 123456" /></div>
+
+          <!-- Horse Information -->
+          <div class="full-width"><h3 style="font-family: 'Instrument Serif'; margin: 24px 0 4px;">Horse Information</h3><hr style="margin-bottom: 16px;"></div>
+          <div class="form-group"><label for="horse-name">Horse name *</label><input id="horse-name" type="text" name="horseName" required placeholder="Midnight Dancer" /></div>
+          <div class="form-group"><label for="horse-age">Horse age (years) *</label><input id="horse-age" type="number" name="horseAge" required min="1" max="30" inputmode="numeric" /></div>
+          <div class="form-group"><label for="horse-breed">Horse breed (optional)</label><input id="horse-breed" type="text" name="horseBreed" placeholder="Quarter Horse, Thoroughbred..." /></div>
+          <div class="form-group"><label for="horse-gender">Gender *</label><select id="horse-gender" name="horseGender" required><option value="">Select</option><option>Mare</option><option>Gelding</option><option>Stallion</option></select></div>
+
+          <!-- Class Selection -->
+          <div class="full-width"><h3 style="font-family: 'Instrument Serif'; margin: 24px 0 4px;">Class Selection</h3><hr style="margin-bottom: 16px;"></div>
+          <div class="form-group"><label>Division *</label><select name="division" id="division" required><option value="Beginner">Beginner</option><option value="Novice">Novice</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option><option value="Open">Open</option></select></div>
+          <div class="full-width"><label>Additional Classes (+$15 each)</label><div class="checkbox-group"><label><input type="checkbox" name="additionalClass" value="Best Condition Award" class="addon-class"> Best Condition Award</label><label><input type="checkbox" name="additionalClass" value="High Point Champion" class="addon-class"> High Point Champion</label><label><input type="checkbox" name="additionalClass" value="Style Award" class="addon-class"> Style Award</label></div></div>
+
+          <!-- Stall Reservation -->
+          <div class="full-width"><h3 style="font-family: 'Instrument Serif'; margin: 24px 0 4px;">Stall Reservation</h3><hr style="margin-bottom: 16px;"></div>
+          <div class="form-group"><label>Stall Required?</label><div class="radio-group-inline"><label><input type="radio" name="stallRequired" value="Yes" class="stall-radio"> Yes</label><label><input type="radio" name="stallRequired" value="No" class="stall-radio" checked> No</label></div></div>
+          <div class="form-group" id="stallCountGroup" style="display: none;"><label>Number of Stalls *</label><input type="number" name="stallCount" id="stallCount" min="1" max="10" value="1" /></div>
+          <div class="form-group" id="beddingGroup" style="display: none;"><label>Bedding Preference</label><select name="beddingPreference"><option>Shavings</option><option>Straw</option><option>None</option></select></div>
+
+          <!-- Emergency Contact -->
+          <div class="full-width"><h3 style="font-family: 'Instrument Serif'; margin: 24px 0 4px;">Emergency Contact</h3><hr style="margin-bottom: 16px;"></div>
+          <div class="form-group"><label>Emergency Contact Name *</label><input type="text" name="emergencyName" required placeholder="John Smith" /></div>
+          <div class="form-group"><label>Emergency Contact Phone *</label><input type="tel" name="emergencyPhone" required placeholder="(555) 999-8888" /></div>
+
+          <!-- Waivers & Releases -->
+          <div class="full-width"><h3 style="font-family: 'Instrument Serif'; margin: 24px 0 4px;">Waivers & Releases</h3><hr style="margin-bottom: 16px;"></div>
+          <div class="full-width"><div class="form-group"><label>Liability Waiver *</label><textarea name="waiverSignature" rows="3" readonly style="background:#f3f2ef;">By submitting this registration, I acknowledge that equestrian sports involve inherent risks. I release the event organizers, landowners, and volunteers from any liability for injury or loss. I confirm that my horse is fit to compete and my insurance is current.</textarea><div class="checkbox-group" style="margin-top: 8px;"><label><input type="checkbox" name="waiverAccepted" required> I have read and agree to the liability waiver *</label></div></div></div>
+          <div class="full-width"><div class="checkbox-group"><label><input type="checkbox" name="medicalRelease" required> I authorize medical treatment in case of emergency *</label><label><input type="checkbox" name="mediaConsent"> I consent to photos/videos being used for promotional purposes</label></div></div>
+
+          <!-- Fee Calculation Display -->
+          <div class="full-width">
+            <div class="fee-summary">
+              <span><strong>Registration summary</strong> (base entry $50 + extras)</span>
+              <span class="total-fee" id="totalFeeDisplay">$50.00</span>
+            </div>
+          </div>
+
+          <div class="full-width">
+            <button type="submit" class="submit-btn" id="submitBtn">Complete Registration →</button>
+            <p style="font-size: 0.7rem; text-align: center; margin-top: 16px; color: #8f8f88;">Secure registration powered by Formgrid. Your data is sent directly to the event organizer.</p>
+          </div>
+        </div>
+      </form>
+      <div id="formSuccessMessage" style="display: none; text-align: center; padding: 32px; background: var(--sage-pale); border-radius: 24px; margin-top: 20px;"><span style="font-size: 2rem;">✓</span><h3 style="margin-top: 12px;">Registration received!</h3><p>A confirmation email will be sent shortly. Thank you for entering.</p></div>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <section class="section">
+    <div class="container text-center">
+      <h2 class="section-title">Trusted by ride organizers</h2>
+      <div class="testimonial-card">
+        <p style="font-size: 1.05rem; font-style: italic; color: #2c3a2b;">“We were drowning in paper entries. Now our ride manager gets clean, organized emails for every registration. Game changer.”</p>
+        <p style="margin-top: 16px; font-weight: 600;">Endurance Ride Organizer, Sierra Nevada Trail Ride.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <p style="margin-bottom: 16px;">© 2026 EquiRegister: Streamlined equestrian event management.</p>
+    <p style="font-size: 0.8rem;">Powered by <a href="https://formgrid.dev">Formgrid</a> | <a href="#">Privacy</a></p>
+    <p style="font-size: 0.7rem; margin-top: 24px; opacity: 0.6;">To activate form submissions: replace <strong>YOUR_ENDPOINT_ID</strong> in the form action with your actual Formgrid endpoint. Get it from <a href="https://formgrid.dev" style="color: var(--sage-light);">formgrid.dev</a></p>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    const form = document.getElementById('horse-show-form');
+    const submitBtn = document.getElementById('submitBtn');
+    const successDiv = document.getElementById('formSuccessMessage');
+    const stallRequiredRadios = document.querySelectorAll('.stall-radio');
+    const stallCountGroup = document.getElementById('stallCountGroup');
+    const beddingGroup = document.getElementById('beddingGroup');
+    const stallCountInput = document.getElementById('stallCount');
+    const additionalClassCheckboxes = document.querySelectorAll('.addon-class');
+    const totalSpan = document.getElementById('totalFeeDisplay');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (event) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        event.preventDefault();
+        const navOffset = 96;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset;
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      });
+    });
+
+    const BASE_FEE = 50;
+    const ADDITIONAL_CLASS_FEE = 15;
+    const STALL_FEE_PER_STALL = 25;
+
+    function updateTotalFee() {
+      let total = BASE_FEE;
+      const selectedClasses = Array.from(additionalClassCheckboxes).filter(cb => cb.checked);
+      total += selectedClasses.length * ADDITIONAL_CLASS_FEE;
+      
+      const stallRequired = document.querySelector('input[name="stallRequired"]:checked');
+      if (stallRequired && stallRequired.value === 'Yes') {
+        let stallCount = parseInt(stallCountInput.value, 10);
+        if (isNaN(stallCount) || stallCount < 1) stallCount = 1;
+        total += stallCount * STALL_FEE_PER_STALL;
+      }
+      totalSpan.innerText = `$${total.toFixed(2)}`;
+      
+      const divisionSelect = document.getElementById('division');
+      const division = divisionSelect ? divisionSelect.value : 'Open';
+      const subjectInput = document.getElementById('dynamic-subject');
+      const riderName = document.querySelector('input[name="riderFullName"]')?.value || 'Rider';
+      if (subjectInput) subjectInput.value = `Horse Show Registration - ${riderName} - ${division} - $${total.toFixed(2)}`;
+    }
+
+    function toggleStallFields() {
+      const selected = document.querySelector('input[name="stallRequired"]:checked');
+      if (selected && selected.value === 'Yes') {
+        stallCountGroup.style.display = 'flex';
+        beddingGroup.style.display = 'flex';
+        stallCountInput.setAttribute('required', 'required');
+        updateTotalFee();
+      } else {
+        stallCountGroup.style.display = 'none';
+        beddingGroup.style.display = 'none';
+        stallCountInput.removeAttribute('required');
+        updateTotalFee();
+      }
+    }
+
+    additionalClassCheckboxes.forEach(cb => cb.addEventListener('change', updateTotalFee));
+    if (stallCountInput) stallCountInput.addEventListener('input', updateTotalFee);
+    stallRequiredRadios.forEach(radio => radio.addEventListener('change', () => { toggleStallFields(); updateTotalFee(); }));
+    
+    const divisionSelect = document.getElementById('division');
+    if (divisionSelect) divisionSelect.addEventListener('change', updateTotalFee);
+    const riderNameInput = document.querySelector('input[name="riderFullName"]');
+    if (riderNameInput) riderNameInput.addEventListener('input', updateTotalFee);
+    
+    toggleStallFields();
+    updateTotalFee();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (form.action.includes('YOUR_ENDPOINT_ID')) {
+        alert('Add your Formgrid endpoint ID before accepting registrations.');
+        return;
+      }
+      
+      const waiverCheck = document.querySelector('input[name="waiverAccepted"]');
+      const medicalCheck = document.querySelector('input[name="medicalRelease"]');
+      if (!waiverCheck.checked) {
+        alert('Please accept the liability waiver to continue.');
+        return;
+      }
+      if (!medicalCheck.checked) {
+        alert('Please authorize medical release to complete registration.');
+        return;
+      }
+      
+      const stallReq = document.querySelector('input[name="stallRequired"]:checked');
+      if (stallReq && stallReq.value === 'Yes') {
+        const stalls = parseInt(stallCountInput.value, 10);
+        if (isNaN(stalls) || stalls < 1) {
+          alert('Please enter a valid number of stalls (minimum 1).');
+          return;
+        }
+      }
+      
+      const requiredFields = form.querySelectorAll('[required]');
+      let missing = false;
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) missing = true;
+      });
+      if (missing) {
+        alert('Please fill in all required fields before submitting.');
+        return;
+      }
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting ...';
+      
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        
+        if (response.ok) {
+          form.style.display = 'none';
+          successDiv.style.display = 'block';
+          window.scrollTo({ top: successDiv.offsetTop - 80, behavior: 'smooth' });
+        } else {
+          alert('Something went wrong. Please verify your Formgrid endpoint or try again later.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Complete Registration →';
+        }
+      } catch (err) {
+        alert('Network error. Please check your connection and try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Complete Registration →';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

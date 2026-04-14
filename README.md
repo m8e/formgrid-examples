@@ -17,6 +17,7 @@ Click a template name or preview image to open the live page.
 | [Cleaning Service](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/cleaning-service/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/) | Appointment and service form |
 | [Real Estate](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/real-estate/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | Property enquiry form |
 | [Wedding Vendor Inquiry](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/wedding-inquiry/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/) | Multi-vendor wedding inquiry form for photographers, florists, caterers, and venues |
+| [EquiRegister](https://allenarduino.github.io/formgrid-examples/equestrian-registration/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/equestrian-registration/preview.png)](https://allenarduino.github.io/formgrid-examples/equestrian-registration/) | Equestrian event registration with rider and horse details, class selection, stall reservations, waivers, and dynamic fees |
 
 **Direct links**
 
@@ -25,8 +26,9 @@ Click a template name or preview image to open the live page.
 - [Cleaning Service — live](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/)
 - [Real Estate — live](https://allenarduino.github.io/formgrid-examples/industries/real-estate/)
 - [Wedding Vendor Inquiry — live](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/)
+- [EquiRegister — live](https://allenarduino.github.io/formgrid-examples/equestrian-registration/)
 
-Source files live under [`industries/`](./industries/) in this repo.
+Source files: [`industries/`](./industries/) and [`equestrian-registration/`](./equestrian-registration/).
 
 ## How to Use Any Template
 
