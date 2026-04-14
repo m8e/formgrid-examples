@@ -2,7 +2,7 @@
 
 Free, professional HTML templates for
 collecting form submissions. Powered by
-Formgrid.dev — no backend required.
+Formgrid.dev. No backend required.
 
 **Live site (GitHub Pages):** [allenarduino.github.io/formgrid-examples](https://allenarduino.github.io/formgrid-examples/)
 
@@ -16,6 +16,7 @@ Click a template name or preview image to open the live page.
 | [Photographer](https://allenarduino.github.io/formgrid-examples/industries/photographer/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/photographer/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/photographer/) | Booking and package selection |
 | [Cleaning Service](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/cleaning-service/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/) | Appointment and service form |
 | [Real Estate](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/real-estate/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | Property enquiry form |
+| [Wedding Vendor Inquiry](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/wedding-inquiry/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/) | Multi-vendor wedding inquiry form for photographers, florists, caterers, and venues |
 
 **Direct links**
 
@@ -23,6 +24,7 @@ Click a template name or preview image to open the live page.
 - [Photographer — live](https://allenarduino.github.io/formgrid-examples/industries/photographer/)
 - [Cleaning Service — live](https://allenarduino.github.io/formgrid-examples/industries/cleaning-service/)
 - [Real Estate — live](https://allenarduino.github.io/formgrid-examples/industries/real-estate/)
+- [Wedding Vendor Inquiry — live](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/)
 
 Source files live under [`industries/`](./industries/) in this repo.
 
