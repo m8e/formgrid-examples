@@ -18,6 +18,7 @@ Click a template name or preview image to open the live page.
 | [Real Estate](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/real-estate/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/real-estate/) | Property enquiry form |
 | [Wedding Vendor Inquiry](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/wedding-inquiry/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/) | Multi-vendor wedding inquiry form for photographers, florists, caterers, and venues |
 | [Event Registration](https://allenarduino.github.io/formgrid-examples/industries/event-registration/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/event-registration/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/event-registration/) | Gala-style landing page with contact details, ticket tiers, guest count, dietary preferences, and notes |
+| [Quote Request](https://allenarduino.github.io/formgrid-examples/industries/quote-request-form/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/industries/quote-request-form/preview.png)](https://allenarduino.github.io/formgrid-examples/industries/quote-request-form/) | Custom apparel and printing quote with project type, need-by date, product and decoration options, placement checkboxes, artwork upload, live estimate panel, and consent |
 | [EquiRegister](https://allenarduino.github.io/formgrid-examples/equestrian-registration/) | [![preview](https://raw.githubusercontent.com/allenarduino/formgrid-examples/main/equestrian-registration/preview.png)](https://allenarduino.github.io/formgrid-examples/equestrian-registration/) | Equestrian event registration with rider and horse details, class selection, stall reservations, waivers, and dynamic fees |
 
 **Direct links**
@@ -28,6 +29,7 @@ Click a template name or preview image to open the live page.
 - [Real Estate — live](https://allenarduino.github.io/formgrid-examples/industries/real-estate/)
 - [Wedding Vendor Inquiry — live](https://allenarduino.github.io/formgrid-examples/industries/wedding-inquiry/)
 - [Event Registration — live](https://allenarduino.github.io/formgrid-examples/industries/event-registration/)
+- [Quote Request — live](https://allenarduino.github.io/formgrid-examples/industries/quote-request-form/)
 - [EquiRegister — live](https://allenarduino.github.io/formgrid-examples/equestrian-registration/)
 
 Source files: [`industries/`](./industries/) and [`equestrian-registration/`](./equestrian-registration/).

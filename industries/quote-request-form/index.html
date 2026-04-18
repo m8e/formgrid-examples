@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get a Quote — Apex Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black:        #0a0a08;
+      --black-soft:   #111110;
+      --black-mid:    #1a1a17;
+      --black-light:  #252520;
+      --white:        #ffffff;
+      --cream:        #f5f2ea;
+      --cream-deep:   #ede9de;
+      --ink:          #1a1a14;
+      --muted:        #6b6b5e;
+      --border:       #2e2e28;
+      --border-light: #e0ddd4;
+      --amber:        #e8a020;
+      --amber-light:  #f0b840;
+      --amber-pale:   #fdf3db;
+      --radius:       6px;
+      --radius-lg:    14px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+
+    .anim-1 { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s both; }
+    .anim-2 { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s both; }
+    .anim-3 { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+    .anim-4 { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both; }
+
+    /* ===== NAV ===== */
+    nav {
+      height: 60px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--black-soft);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--amber);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-mark svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--black);
+    }
+
+    .nav-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+
+    .nav-contact {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-phone {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-phone svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--amber);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .nav-phone:hover { color: rgba(255,255,255,0.8); }
+
+    .nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: rgba(232,160,32,0.1);
+      border: 1px solid rgba(232,160,32,0.25);
+      border-radius: 100px;
+      font-size: 0.67rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .badge-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--amber);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ===== LEFT BRAND PANEL ===== */
+    .brand-panel {
+      background: var(--black-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 60px 48px 56px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 64px,
+        rgba(255,255,255,0.015) 64px,
+        rgba(255,255,255,0.015) 65px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 64px,
+        rgba(255,255,255,0.015) 64px,
+        rgba(255,255,255,0.015) 65px
+      );
+      pointer-events: none;
+    }
+
+    .brand-glow {
+      position: absolute;
+      bottom: -40px;
+      right: -60px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(232,160,32,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .brand-top {
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-eyebrow::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .brand-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 4.5vw, 4.8rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .brand-h1 em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .brand-desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.85;
+      max-width: 340px;
+    }
+
+    .trust-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .trust-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(232,160,32,0.08);
+      border: 1px solid rgba(232,160,32,0.18);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .trust-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--amber);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .trust-text {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.4;
+    }
+
+    .trust-text strong {
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    .brand-stats {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      margin-top: 48px;
+    }
+
+    .bstat {
+      flex: 1;
+      padding: 16px 20px;
+      border-right: 1px solid var(--border);
+    }
+
+    .bstat:last-child { border-right: none; }
+
+    .bstat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.65rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .bstat-num em {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .bstat-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+
+    /* ===== RIGHT: FORM + ESTIMATE ===== */
+    .form-side {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      align-items: flex-start;
+    }
+
+    .form-wrap {
+      padding: 48px 36px 48px 44px;
+      overflow-y: auto;
+    }
+
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .form-sub {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* Section headings */
+    .fsec {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding-bottom: 7px;
+      border-bottom: 1.5px solid var(--ink);
+      margin-bottom: 10px;
+      margin-top: 18px;
+    }
+
+    .fsec:first-of-type { margin-top: 0; }
+
+    .fsec-num {
+      width: 20px;
+      height: 20px;
+      background: var(--ink);
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .fsec-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .fg {
+      margin-bottom: 10px;
+    }
+
+    .fg label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .fg input,
+    .fg select,
+    .fg textarea {
+      width: 100%;
+      padding: 9px 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.86rem;
+      color: var(--ink);
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+    }
+
+    .fg select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%236b6b5e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 11px center;
+      padding-right: 32px;
+      cursor: pointer;
+    }
+
+    .fg textarea {
+      min-height: 80px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .fg input:focus,
+    .fg select:focus,
+    .fg textarea:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.1);
+    }
+
+    .frow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    /* Radio tabs */
+    .rtabs {
+      display: flex;
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .rtab {
+      position: relative;
+      flex: 1;
+    }
+
+    .rtab input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .rtab label {
+      display: block;
+      text-align: center;
+      padding: 7px 4px;
+      border-radius: calc(var(--radius) - 2px);
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.15s;
+      line-height: 1.3;
+    }
+
+    .rtab input:checked + label {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* Checkboxes */
+    .cgroup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .copt {
+      position: relative;
+    }
+
+    .copt input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .copt label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--muted);
+      transition: all 0.15s;
+      line-height: 1.2;
+    }
+
+    .copt input:checked + label {
+      background: var(--amber-pale);
+      border-color: var(--amber);
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .chk {
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid var(--border-light);
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      transition: all 0.15s;
+    }
+
+    .copt input:checked + label .chk {
+      background: var(--amber);
+      border-color: var(--amber);
+    }
+
+    .copt input:checked + label .chk::after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 4px;
+      border-left: 1.5px solid var(--black);
+      border-bottom: 1.5px solid var(--black);
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    /* File upload */
+    .file-area {
+      position: relative;
+    }
+
+    .file-inp {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .file-drop {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1.5px dashed var(--border-light);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .file-drop:hover,
+    .file-drop.dragover {
+      border-color: var(--amber);
+      background: var(--amber-pale);
+    }
+
+    .file-drop-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--cream-deep);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .file-drop-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    .file-drop-text strong {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .file-drop-text span {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .file-chosen {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--amber-pale);
+      border: 1.5px solid var(--amber);
+      border-radius: var(--radius);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-top: 7px;
+    }
+
+    .file-chosen svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--amber);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    /* Consent */
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-bottom: 7px;
+      cursor: pointer;
+    }
+
+    .consent input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .cbox {
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid var(--border-light);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      transition: all 0.15s;
+    }
+
+    .consent.checked .cbox {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .consent.checked .cbox::after {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 4.5px;
+      border-left: 1.5px solid white;
+      border-bottom: 1.5px solid white;
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    .consent-txt {
+      font-size: 0.76rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.55;
+      user-select: none;
+    }
+
+    /* Submit */
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover { background: var(--black-light); }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .form-note svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--amber);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    /* Success */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 48px 16px;
+    }
+
+    .success-ring {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--amber);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+    }
+
+    .success-ring svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--amber);
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .form-success h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .form-success p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ===== LIVE ESTIMATE PANEL ===== */
+    .estimate-panel {
+      background: var(--black);
+      border-left: 1px solid var(--border);
+      padding: 28px 20px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ep-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ep-label::before {
+      content: '';
+      width: 12px;
+      height: 1px;
+      background: var(--amber);
+    }
+
+    .ep-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .ep-empty {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 10px;
+      padding: 24px 0;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+    }
+
+    .ep-empty svg {
+      width: 22px;
+      height: 22px;
+      stroke: rgba(255,255,255,0.15);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .ep-empty p {
+      font-size: 0.73rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.55;
+    }
+
+    .ep-active {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 14px;
+    }
+
+    .ep-row {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ep-row:last-child { border-bottom: none; }
+
+    .ep-row-label {
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 2px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .ep-row-val {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .ep-total {
+      background: var(--amber);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .ep-total-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+      margin-bottom: 4px;
+    }
+
+    .ep-total-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.03em;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .ep-total-unit {
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: rgba(0,0,0,0.4);
+      margin-top: 3px;
+    }
+
+    .ep-min-warn {
+      display: none;
+      background: rgba(232,160,32,0.08);
+      border: 1px solid rgba(232,160,32,0.22);
+      border-radius: var(--radius);
+      padding: 9px 11px;
+      font-size: 0.69rem;
+      color: var(--amber);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .ep-disclaimer {
+      font-size: 0.67rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.6;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--black-soft);
+      border-top: 1px solid var(--border);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .footer-sep {
+      width: 1px;
+      height: 12px;
+      background: var(--border);
+    }
+
+    .footer-contact {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-contact a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--white); }
+
+    .footer-powered {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.18);
+    }
+
+    .footer-powered a {
+      color: var(--amber);
+      text-decoration: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      main { grid-template-columns: 1fr; }
+
+      .brand-panel {
+        padding: 48px 32px 40px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .brand-eyebrow { justify-content: center; }
+      .brand-eyebrow::before { display: none; }
+      .brand-desc { margin: 0 auto; }
+      .trust-row { align-items: flex-start; max-width: 340px; margin: 32px auto 0; }
+      .brand-stats { margin: 36px auto 0; }
+
+      .form-side { grid-template-columns: 1fr; }
+      .form-wrap { padding: 40px 28px 36px; }
+
+      .estimate-panel {
+        position: static;
+        height: auto;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 24px 28px;
+      }
+
+      .ep-empty { min-height: 80px; }
+
+      nav { padding: 0 24px; }
+      footer { padding: 16px 24px; }
+    }
+
+    @media (max-width: 640px) {
+      .brand-h1 { font-size: 2.8rem; }
+      .frow { grid-template-columns: 1fr; }
+      .cgroup { grid-template-columns: 1fr; }
+      .rtabs { flex-wrap: wrap; }
+      .rtab { min-width: 45%; }
+      .nav-badge { display: none; }
+      .footer-sep { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span class="nav-name">Apex Studio</span>
+    </a>
+    <div class="nav-contact">
+      <a href="tel:+16304415244" class="nav-phone">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (630) 441-5244
+      </a>
+      <div class="nav-badge">
+        <div class="badge-dot"></div>
+        Accepting Orders
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- LEFT: BRAND -->
+    <div class="brand-panel">
+      <div class="brand-glow"></div>
+
+      <div class="brand-top">
+        <div class="brand-eyebrow anim-1">Custom Apparel and Printing</div>
+
+        <h1 class="brand-h1 anim-2">
+          GET YOUR<br />
+          <em>FREE</em><br />
+          QUOTE
+        </h1>
+
+        <p class="brand-desc anim-3">
+          Fill in the form with your project details and upload your artwork if available. We review every quote request and follow up within one business day with accurate pricing.
+        </p>
+
+        <div class="trust-row anim-4">
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="trust-text">
+              <strong>Response within 24 hours</strong>
+              We review your artwork and send a final itemized quote.
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="trust-text">
+              <strong>Upfront pricing, no surprises</strong>
+              The quote we send is the price you pay.
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="trust-text">
+              <strong>Upload your artwork directly</strong>
+              Attach your logo or design file with your request.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-stats">
+        <div class="bstat">
+          <div class="bstat-num">600<em>+</em></div>
+          <div class="bstat-label">Orders Completed</div>
+        </div>
+        <div class="bstat">
+          <div class="bstat-num">24<em>hr</em></div>
+          <div class="bstat-label">Response Time</div>
+        </div>
+        <div class="bstat">
+          <div class="bstat-num">5<em>★</em></div>
+          <div class="bstat-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM + ESTIMATE -->
+    <div class="form-side">
+
+      <div class="form-wrap">
+        <h2 class="form-title">Quick Quote Request</h2>
+        <p class="form-sub">
+          Fill out the form and upload your artwork if available. Estimated pricing is for budgeting only and final pricing may vary based on artwork, placement, and production requirements.
+        </p>
+
+        <form id="quote-form" enctype="multipart/form-data">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" id="form-subject" value="New Quote Request" />
+
+          <!-- 1. Contact -->
+          <div class="fsec">
+            <div class="fsec-num">1</div>
+            <div class="fsec-title">Contact Information</div>
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Alex" required />
+            </div>
+            <div class="fg">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Rivera" required />
+            </div>
+          </div>
+
+          <div class="fg">
+            <label for="company">Company or Organization</label>
+            <input type="text" id="company" name="company" placeholder="Your company name" />
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="alex@email.com" required />
+            </div>
+            <div class="fg">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-1234" required />
+            </div>
+          </div>
+
+          <!-- 2. Project Basics -->
+          <div class="fsec">
+            <div class="fsec-num">2</div>
+            <div class="fsec-title">Project Basics</div>
+          </div>
+
+          <div class="fg">
+            <label>Project Type</label>
+            <div class="rtabs">
+              <div class="rtab">
+                <input type="radio" id="pt1" name="projectType" value="New Design / First Order" checked />
+                <label for="pt1">New Design</label>
+              </div>
+              <div class="rtab">
+                <input type="radio" id="pt2" name="projectType" value="Exact Re-order" />
+                <label for="pt2">Re-order</label>
+              </div>
+              <div class="rtab">
+                <input type="radio" id="pt3" name="projectType" value="Need Advice" />
+                <label for="pt3">Need Advice</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label for="deadline">Need By Date</label>
+            <input type="date" id="deadline" name="deadline" />
+          </div>
+
+          <!-- 3. Product and Decoration -->
+          <div class="fsec">
+            <div class="fsec-num">3</div>
+            <div class="fsec-title">Product and Decoration</div>
+          </div>
+
+          <div class="fg">
+            <label for="product">Select Apparel Item *</label>
+            <select id="product" name="product" required>
+              <option value="">Select a product</option>
+              <option>Standard T-Shirt (Heat Print / DTF)</option>
+              <option>Standard T-Shirt (Screen Printed)</option>
+              <option>Performance Polo (Embroidered)</option>
+              <option>Standard Hoodie (Heat Print / DTF)</option>
+              <option>Richardson 112 Hat (Embroidered)</option>
+              <option>Something Else / Need Custom Quote</option>
+            </select>
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label for="quantity">Total Quantity *</label>
+              <input type="number" id="quantity" name="quantity" placeholder="e.g. 50" min="1" required />
+            </div>
+            <div class="fg">
+              <label for="garmentColor">Garment Color(s)</label>
+              <input type="text" id="garmentColor" name="garmentColor" placeholder="e.g. Navy, White" />
+            </div>
+          </div>
+
+          <div class="fg">
+            <label>Decoration Method</label>
+            <div class="rtabs">
+              <div class="rtab">
+                <input type="radio" id="dm1" name="decorationMethod" value="Heat Print / DTF" checked />
+                <label for="dm1">Heat Print</label>
+              </div>
+              <div class="rtab">
+                <input type="radio" id="dm2" name="decorationMethod" value="Embroidery" />
+                <label for="dm2">Embroidery</label>
+              </div>
+              <div class="rtab">
+                <input type="radio" id="dm3" name="decorationMethod" value="Screen Print" />
+                <label for="dm3">Screen Print</label>
+              </div>
+              <div class="rtab">
+                <input type="radio" id="dm4" name="decorationMethod" value="Not Sure" />
+                <label for="dm4">Not Sure</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label>Print or Embroidery Placement</label>
+            <div class="cgroup">
+              <div class="copt">
+                <input type="checkbox" id="p1" name="placement_leftChest" value="Left Chest" />
+                <label for="p1"><span class="chk"></span>Left Chest</label>
+              </div>
+              <div class="copt">
+                <input type="checkbox" id="p2" name="placement_fullFront" value="Full Front" />
+                <label for="p2"><span class="chk"></span>Full Front</label>
+              </div>
+              <div class="copt">
+                <input type="checkbox" id="p3" name="placement_fullBack" value="Full Back" />
+                <label for="p3"><span class="chk"></span>Full Back</label>
+              </div>
+              <div class="copt">
+                <input type="checkbox" id="p4" name="placement_sleeve" value="Sleeve" />
+                <label for="p4"><span class="chk"></span>Sleeve</label>
+              </div>
+              <div class="copt">
+                <input type="checkbox" id="p5" name="placement_hatFront" value="Hat Front" />
+                <label for="p5"><span class="chk"></span>Hat Front</label>
+              </div>
+              <div class="copt">
+                <input type="checkbox" id="p6" name="placement_other" value="Other" />
+                <label for="p6"><span class="chk"></span>Other</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Artwork -->
+          <div class="fsec">
+            <div class="fsec-num">4</div>
+            <div class="fsec-title">Artwork and Notes</div>
+          </div>
+
+          <div class="fg">
+            <label>Upload Artwork</label>
+            <div class="file-area">
+              <input
+                type="file"
+                class="file-inp"
+                id="artwork"
+                name="artwork"
+                accept=".jpg,.jpeg,.png,.pdf,.ai,.eps,.svg,.psd"
+              />
+              <div class="file-drop" id="file-drop">
+                <div class="file-drop-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </div>
+                <div class="file-drop-text">
+                  <strong>Click to upload or drag and drop</strong>
+                  <span>JPG, PNG, PDF, AI, EPS, SVG up to 10MB</span>
+                </div>
+              </div>
+            </div>
+            <div class="file-chosen" id="file-chosen">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span id="file-name"></span>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label for="notes">Additional Instructions</label>
+            <textarea id="notes" name="notes" placeholder="Colors, special requirements, or anything else we should know."></textarea>
+          </div>
+
+          <!-- 5. Consent -->
+          <div class="fsec">
+            <div class="fsec-num">5</div>
+            <div class="fsec-title">Consent</div>
+          </div>
+
+          <div class="consent" id="consent1">
+            <input type="checkbox" id="c1" name="smsConsent" value="Yes" />
+            <div class="cbox"></div>
+            <span class="consent-txt">It is okay to text me about my quote.</span>
+          </div>
+
+          <div class="consent" id="consent2">
+            <input type="checkbox" id="c2" name="priceConsent" value="Yes" required />
+            <div class="cbox"></div>
+            <span class="consent-txt">I understand the price generated by this form is not final. Pricing depends on quantity, decoration method, artwork requirements, and print locations. *</span>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">
+            Submit Quote Request
+          </button>
+
+          <div class="form-note">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            We typically follow up after reviewing your artwork and details.
+          </div>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <div class="success-ring">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Quote Submitted</h3>
+          <p>
+            Thank you. We have received your request and will review your artwork and project details. Expect to hear from us within one business day.
+          </p>
+        </div>
+      </div>
+
+      <!-- ESTIMATE PANEL -->
+      <div class="estimate-panel">
+        <div class="ep-label">Live Estimate</div>
+        <div class="ep-title">Your Quote</div>
+
+        <div class="ep-min-warn" id="ep-min">
+          ⚠ Below minimum order quantity for this product.
+        </div>
+
+        <div class="ep-empty" id="ep-empty">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"/>
+            <path d="M9 15h3l8.5-8.5a1.5 1.5 0 0 0-3-3L9 12v3"/>
+          </svg>
+          <p>Select a product and enter your quantity to see a live estimate.</p>
+        </div>
+
+        <div class="ep-active" id="ep-active">
+          <div class="ep-row">
+            <div class="ep-row-label">Product</div>
+            <div class="ep-row-val" id="ep-product">—</div>
+          </div>
+          <div class="ep-row">
+            <div class="ep-row-label">Method</div>
+            <div class="ep-row-val" id="ep-method">—</div>
+          </div>
+          <div class="ep-row">
+            <div class="ep-row-label">Quantity</div>
+            <div class="ep-row-val" id="ep-qty">—</div>
+          </div>
+          <div class="ep-row">
+            <div class="ep-row-label">Unit Price</div>
+            <div class="ep-row-val" id="ep-unit">—</div>
+          </div>
+        </div>
+
+        <div class="ep-total" id="ep-total">
+          <div class="ep-total-label">Estimated Total</div>
+          <div class="ep-total-amount" id="ep-amount">$0</div>
+          <div class="ep-total-unit" id="ep-unit-line"></div>
+        </div>
+
+        <p class="ep-disclaimer">
+          Estimated pricing is for planning purposes only. Final quote may vary based on artwork complexity, garment brand, and production requirements.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <span class="footer-copy">&copy; 2026 Apex Studio. All rights reserved.</span>
+      <div class="footer-sep"></div>
+      <span class="footer-contact">
+        <a href="tel:+16304415244">(630) 441-5244</a>
+        &nbsp;&middot;&nbsp;
+        <a href="mailto:hello@apexstudio.com">hello@apexstudio.com</a>
+        &nbsp;&middot;&nbsp;
+        935 W. Galena Blvd. Aurora, IL
+      </span>
+    </div>
+    <span class="footer-powered">
+      Powered by <a href="https://formgrid.dev" target="_blank" rel="noopener">Formgrid</a>
+    </span>
+  </footer>
+
+  <script>
+    // ===== FILE UPLOAD =====
+    const fileInp    = document.getElementById('artwork');
+    const fileDrop   = document.getElementById('file-drop');
+    const fileChosen = document.getElementById('file-chosen');
+    const fileName   = document.getElementById('file-name');
+
+    fileInp.addEventListener('change', () => {
+      if (fileInp.files.length > 0) {
+        fileName.textContent      = fileInp.files[0].name;
+        fileChosen.style.display  = 'flex';
+        fileDrop.style.borderColor = 'var(--amber)';
+      }
+    });
+
+    fileDrop.addEventListener('dragover', e => {
+      e.preventDefault();
+      fileDrop.classList.add('dragover');
+    });
+
+    fileDrop.addEventListener('dragleave', () => {
+      fileDrop.classList.remove('dragover');
+    });
+
+    fileDrop.addEventListener('drop', e => {
+      e.preventDefault();
+      fileDrop.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        fileInp.files              = e.dataTransfer.files;
+        fileName.textContent       = e.dataTransfer.files[0].name;
+        fileChosen.style.display   = 'flex';
+        fileDrop.style.borderColor = 'var(--amber)';
+      }
+    });
+
+    // ===== CONSENT TOGGLES =====
+    ['consent1','consent2'].forEach(id => {
+      const item = document.getElementById(id);
+      const cb   = item.querySelector('input[type="checkbox"]');
+      item.addEventListener('click', e => {
+        if (e.target !== cb) cb.checked = !cb.checked;
+        item.classList.toggle('checked', cb.checked);
+      });
+    });
+
+    // ===== LIVE ESTIMATE =====
+    const PRICING = {
+      'Standard T-Shirt (Heat Print / DTF)': {
+        base: { min: 8.50, max: 14.00 }, minQty: 6,
+        methods: { 'Heat Print / DTF': 1.0, 'Embroidery': 1.4, 'Screen Print': 0.85, 'Not Sure': 1.0 }
+      },
+      'Standard T-Shirt (Screen Printed)': {
+        base: { min: 6.00, max: 11.00 }, minQty: 12,
+        methods: { 'Heat Print / DTF': 1.1, 'Embroidery': 1.4, 'Screen Print': 1.0, 'Not Sure': 1.0 }
+      },
+      'Performance Polo (Embroidered)': {
+        base: { min: 18.00, max: 28.00 }, minQty: 6,
+        methods: { 'Heat Print / DTF': 0.9, 'Embroidery': 1.0, 'Screen Print': 0.85, 'Not Sure': 1.0 }
+      },
+      'Standard Hoodie (Heat Print / DTF)': {
+        base: { min: 18.00, max: 26.00 }, minQty: 6,
+        methods: { 'Heat Print / DTF': 1.0, 'Embroidery': 1.3, 'Screen Print': 0.9, 'Not Sure': 1.0 }
+      },
+      'Richardson 112 Hat (Embroidered)': {
+        base: { min: 16.00, max: 24.00 }, minQty: 6,
+        methods: { 'Heat Print / DTF': 0.9, 'Embroidery': 1.0, 'Screen Print': 0.85, 'Not Sure': 1.0 }
+      },
+    };
+
+    function volumeDiscount(qty) {
+      if (qty >= 250) return 0.25;
+      if (qty >= 100) return 0.20;
+      if (qty >= 48)  return 0.15;
+      if (qty >= 24)  return 0.10;
+      if (qty >= 12)  return 0.05;
+      return 0;
+    }
+
+    function fmt(n) {
+      return '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function updateEstimate() {
+      const product = document.getElementById('product').value;
+      const qty     = parseInt(document.getElementById('quantity').value) || 0;
+      const method  = (document.querySelector('input[name="decorationMethod"]:checked') || {}).value || 'Heat Print / DTF';
+
+      const emptyEl  = document.getElementById('ep-empty');
+      const activeEl = document.getElementById('ep-active');
+      const totalEl  = document.getElementById('ep-total');
+      const minEl    = document.getElementById('ep-min');
+
+      if (!product || !qty || !PRICING[product]) {
+        emptyEl.style.display  = 'flex';
+        activeEl.style.display = 'none';
+        totalEl.style.display  = 'none';
+        minEl.style.display    = 'none';
+        return;
+      }
+
+      const data       = PRICING[product];
+      const multiplier = data.methods[method] || 1.0;
+      const discount   = volumeDiscount(qty);
+      const uMin       = data.base.min * multiplier * (1 - discount);
+      const uMax       = data.base.max * multiplier * (1 - discount);
+      const tMin       = uMin * qty;
+      const tMax       = uMax * qty;
+      const belowMin   = qty < data.minQty;
+
+      const shortProduct = product.length > 22
+        ? product.substring(0, 20) + '...'
+        : product;
+
+      document.getElementById('ep-product').textContent  = shortProduct;
+      document.getElementById('ep-method').textContent   = method;
+      document.getElementById('ep-qty').textContent      =
+        qty + (discount > 0 ? ` (${(discount * 100).toFixed(0)}% off)` : '');
+      document.getElementById('ep-unit').textContent     = fmt(uMin) + ' to ' + fmt(uMax);
+      document.getElementById('ep-amount').textContent   = fmt(tMin) + ' to ' + fmt(tMax);
+      document.getElementById('ep-unit-line').textContent = fmt(uMin) + ' to ' + fmt(uMax) + ' per unit';
+
+      emptyEl.style.display  = 'none';
+      activeEl.style.display = 'flex';
+      totalEl.style.display  = 'block';
+      minEl.style.display    = belowMin ? 'block' : 'none';
+    }
+
+    document.getElementById('product').addEventListener('change', updateEstimate);
+    document.getElementById('quantity').addEventListener('input', updateEstimate);
+    document.querySelectorAll('input[name="decorationMethod"]').forEach(r => {
+      r.addEventListener('change', updateEstimate);
+    });
+
+    // ===== FORM SUBMIT =====
+    const form = document.getElementById('quote-form');
+    const btn  = document.getElementById('submit-btn');
+    const succ = document.getElementById('form-success');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const first   = form.querySelector('[name="firstName"]').value;
+      const last    = form.querySelector('[name="lastName"]').value;
+      const product = form.querySelector('[name="product"]').value;
+      const qty     = form.querySelector('[name="quantity"]').value;
+
+      document.getElementById('form-subject').value =
+        `Quote: ${first} ${last} | ${product} | Qty ${qty}`;
+
+      btn.disabled    = true;
+      btn.textContent = 'Submitting...';
+
+      try {
+        const res = await fetch('https://formgrid.dev/api/f/p0rykhzf', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          succ.style.display = 'block';
+        } else {
+          btn.disabled    = false;
+          btn.textContent = 'Submit Quote Request';
+          alert('Something went wrong. Please try again or call us directly.');
+        }
+      } catch {
+        btn.disabled    = false;
+        btn.textContent = 'Submit Quote Request';
+        alert('Network error. Please check your connection and try again.');
+      }
+    });
+  </script>
+</body>
+</html>
