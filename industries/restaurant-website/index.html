@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Noir — Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:      #080808;
+      --deep:       #0f0f0f;
+      --card:       #141414;
+      --border:     #272727;
+      --gold:       #c9a84c;
+      --gold-light: #e8c97a;
+      --cream:      #f5f0e8;
+      --muted:      #888;
+      --text:       #e0dbd2;
+      --white:      #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      background: linear-gradient(to bottom, rgba(8,8,8,.95), transparent);
+      transition: padding .3s, background .3s;
+    }
+    nav.scrolled {
+      background: rgba(8,8,8,.97);
+      padding: 16px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 300;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold) !important; color: var(--black) !important;
+      padding: 11px 26px; font-weight: 500;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 680px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=80') center/cover no-repeat;
+    }
+    .hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(8,8,8,.65) 0%,
+        rgba(8,8,8,.45) 40%,
+        rgba(8,8,8,.75) 100%);
+    }
+    .hero-content {
+      position: relative; text-align: center; padding: 0 24px;
+      animation: fadeUp 1.2s ease both;
+    }
+    .hero-eyebrow {
+      font-size: .62rem; letter-spacing: .42em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 22px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 300; line-height: .9;
+      color: var(--white); letter-spacing: -.02em; margin-bottom: 28px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(255,255,255,.55); margin-bottom: 52px;
+      max-width: 380px; margin-left: auto; margin-right: auto;
+    }
+    .hero-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block; background: var(--gold); color: var(--black);
+      font-size: .63rem; letter-spacing: .24em; text-transform: uppercase;
+      padding: 16px 40px; text-decoration: none; font-weight: 500;
+      transition: background .3s, transform .3s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block; border: 1px solid rgba(255,255,255,.35);
+      color: var(--white); font-size: .63rem; letter-spacing: .24em;
+      text-transform: uppercase; padding: 16px 40px; text-decoration: none;
+      transition: border-color .3s, transform .3s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .scroll-indicator {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .scroll-indicator span {
+      font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+    .scroll-line {
+      width: 1px; height: 56px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── COMMONS ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+    .section-label {
+      font-size: .6rem; letter-spacing: .4em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 300;
+      line-height: 1.1; color: var(--white); margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .divider { width: 56px; height: 1px; background: var(--gold); margin-bottom: 28px; }
+
+    /* ── FOOD STRIP (below hero) ── */
+    .food-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      height: 280px;
+      overflow: hidden;
+    }
+    .food-strip-item {
+      position: relative; overflow: hidden; cursor: pointer;
+    }
+    .food-strip-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+      filter: brightness(.75) saturate(.9);
+    }
+    .food-strip-item:hover img { transform: scale(1.08); filter: brightness(.9) saturate(1.1); }
+    .food-strip-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,.5), transparent);
+    }
+
+    /* ── ABOUT ── */
+    .about { padding: 120px 0; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-main {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .about-img-accent {
+      position: absolute; bottom: -40px; right: -40px;
+      width: 55%; aspect-ratio: 1; object-fit: cover;
+      border: 4px solid var(--black);
+    }
+    .about-badge {
+      position: absolute; top: 32px; left: -28px;
+      background: var(--gold); color: var(--black);
+      width: 110px; height: 110px; border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+    }
+    .about-badge strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 400; line-height: 1;
+    }
+    .about-badge span { font-size: .52rem; letter-spacing: .12em; text-transform: uppercase; }
+    .about-text { padding-bottom: 40px; }
+    .about-text p { color: var(--muted); font-size: .88rem; margin-bottom: 18px; line-height: 1.9; }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+      margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--border);
+    }
+    .stat strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300; color: var(--gold);
+      display: block; line-height: 1;
+    }
+    .stat span {
+      font-size: .62rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── GALLERY MOSAIC ── */
+    .gallery { padding: 0 0 120px; }
+    .gallery-header { text-align: center; margin-bottom: 60px; }
+    .gallery-header .divider { margin: 0 auto 28px; }
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 280px 280px;
+      gap: 6px;
+    }
+    .mosaic-item {
+      overflow: hidden; position: relative;
+    }
+    .mosaic-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease, filter .6s ease;
+      filter: brightness(.82) saturate(.92);
+    }
+    .mosaic-item:hover img { transform: scale(1.06); filter: brightness(.95) saturate(1.1); }
+    .mosaic-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(201,168,76,.08));
+      pointer-events: none;
+    }
+    .m1 { grid-column: 1 / 5; grid-row: 1 / 2; }
+    .m2 { grid-column: 5 / 8; grid-row: 1 / 2; }
+    .m3 { grid-column: 8 / 13; grid-row: 1 / 2; }
+    .m4 { grid-column: 1 / 4; grid-row: 2 / 3; }
+    .m5 { grid-column: 4 / 9; grid-row: 2 / 3; }
+    .m6 { grid-column: 9 / 13; grid-row: 2 / 3; }
+
+    /* ── MENU ── */
+    .menu {
+      padding: 120px 0;
+      background: var(--deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-header { text-align: center; margin-bottom: 72px; }
+    .menu-header .divider { margin: 0 auto 28px; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .menu-card {
+      background: var(--card); border: 1px solid var(--border);
+      overflow: hidden; transition: border-color .4s, transform .4s;
+      position: relative;
+    }
+    .menu-card:hover { border-color: rgba(201,168,76,.4); transform: translateY(-4px); }
+    .menu-card-img {
+      width: 100%; height: 240px; object-fit: cover;
+      display: block; transition: transform .6s ease;
+      filter: brightness(.88) saturate(.95);
+    }
+    .menu-card:hover .menu-card-img { transform: scale(1.05); filter: brightness(.95) saturate(1.05); }
+    .menu-card-body { padding: 32px 28px; }
+    .menu-course {
+      font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .menu-dish {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem; font-weight: 400;
+      color: var(--white); margin-bottom: 10px; line-height: 1.2;
+    }
+    .menu-desc { font-size: .78rem; color: var(--muted); margin-bottom: 20px; line-height: 1.8; }
+    .menu-price { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--gold); }
+
+    /* ── CHEF SECTION ── */
+    .chef { padding: 120px 0; }
+    .chef-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center;
+    }
+    .chef-img-wrap { position: relative; }
+    .chef-img {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover; border: 1px solid var(--border);
+    }
+    .chef-quote {
+      position: absolute; bottom: -30px; right: -30px;
+      background: var(--deep); border: 1px solid var(--border);
+      padding: 28px; max-width: 280px;
+    }
+    .chef-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-style: italic; font-weight: 300;
+      color: var(--white); line-height: 1.5; margin-bottom: 12px;
+    }
+    .chef-quote cite { font-size: .62rem; letter-spacing: .15em; color: var(--gold); }
+    .chef-text p { color: var(--muted); font-size: .88rem; margin-bottom: 18px; line-height: 1.9; }
+    .chef-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 300; color: var(--white);
+      margin-bottom: 6px; line-height: 1;
+    }
+    .chef-title { font-size: .68rem; letter-spacing: .2em; color: var(--gold); margin-bottom: 32px; }
+
+    /* ── INTERIOR STRIP ── */
+    .interior-strip {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+      height: 380px; gap: 6px;
+    }
+    .interior-strip-item { overflow: hidden; position: relative; }
+    .interior-strip-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s, filter .6s;
+      filter: brightness(.78) saturate(.85);
+    }
+    .interior-strip-item:hover img { transform: scale(1.05); filter: brightness(.92) saturate(1); }
+
+    /* ── EXPERIENCE / HOURS ── */
+    .experience { padding: 120px 0; background: var(--deep); border-top: 1px solid var(--border); }
+    .experience-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start;
+    }
+    .exp-list { margin-top: 44px; }
+    .exp-item {
+      display: flex; gap: 22px;
+      padding: 28px 0; border-bottom: 1px solid var(--border);
+    }
+    .exp-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300;
+      color: rgba(201,168,76,.18); line-height: 1; min-width: 56px;
+    }
+    .exp-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400; color: var(--white); margin-bottom: 6px;
+    }
+    .exp-item p { font-size: .78rem; color: var(--muted); line-height: 1.8; }
+    .hours-card {
+      background: var(--card); border: 1px solid var(--border); padding: 44px;
+    }
+    .hours-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem; font-weight: 300; color: var(--white); margin-bottom: 28px;
+    }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: .78rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { color: var(--muted); }
+    .hours-time { color: var(--text); }
+    .hours-closed { color: rgba(201,168,76,.5); font-style: italic; }
+    .location-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 36px 44px; margin-top: 16px;
+    }
+    .location-card address {
+      font-style: normal; font-size: .82rem; color: var(--muted); line-height: 2.1;
+    }
+
+    /* ── BOOKING ── */
+    .booking {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+    .booking-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start;
+    }
+    .booking-info p { color: var(--muted); font-size: .85rem; margin-bottom: 20px; line-height: 1.9; }
+    .booking-img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      border: 1px solid var(--border); margin-top: 36px;
+      filter: brightness(.82);
+    }
+    .booking-note {
+      background: rgba(201,168,76,.06);
+      border: 1px solid rgba(201,168,76,.2);
+      padding: 22px 24px; margin-top: 28px;
+    }
+    .booking-note p { font-size: .76rem; color: var(--muted); margin: 0; line-height: 1.8; }
+    .booking-note strong { color: var(--gold); font-weight: 500; }
+
+    /* ── FORMS ── */
+    .form-card {
+      background: var(--card); border: 1px solid var(--border); padding: 52px 44px;
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 300; color: var(--white); margin-bottom: 6px;
+    }
+    .form-sub { font-size: .72rem; color: var(--muted); letter-spacing: .1em; margin-bottom: 36px; }
+    .form-group { margin-bottom: 22px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label {
+      display: block; font-size: .58rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"],
+    input[type="date"], input[type="time"], input[type="number"],
+    select, textarea {
+      width: 100%; background: rgba(255,255,255,.03);
+      border: 1px solid var(--border); color: var(--text);
+      font-family: 'Montserrat', sans-serif; font-size: .83rem; font-weight: 300;
+      padding: 13px 16px; outline: none; appearance: none;
+      transition: border-color .3s, background .3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold); background: rgba(201,168,76,.04);
+    }
+    input::placeholder, textarea::placeholder { color: rgba(136,136,136,.45); }
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      padding-right: 38px;
+    }
+    select option { background: var(--card); color: var(--text); }
+    textarea { min-height: 110px; resize: vertical; line-height: 1.7; }
+    .honeypot {
+      position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;
+    }
+    .btn-submit {
+      width: 100%; background: var(--gold); color: var(--black);
+      border: none; font-family: 'Montserrat', sans-serif;
+      font-size: .63rem; font-weight: 600; letter-spacing: .24em;
+      text-transform: uppercase; padding: 18px 40px;
+      cursor: pointer; margin-top: 6px;
+      transition: background .3s, transform .2s;
+    }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-success {
+      display: none; text-align: center; padding: 40px 0;
+    }
+    .success-icon {
+      width: 58px; height: 58px; border: 1px solid var(--gold);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 22px;
+    }
+    .form-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 300; color: var(--white); margin-bottom: 10px;
+    }
+    .form-success p { font-size: .78rem; color: var(--muted); }
+
+    /* ── PRIVATE EVENTS ── */
+    .events { padding: 120px 0; border-top: 1px solid var(--border); background: var(--deep); }
+    .events-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start;
+    }
+    .events-img-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 44px;
+    }
+    .events-img-grid img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      border: 1px solid var(--border); filter: brightness(.8) saturate(.9);
+      transition: filter .4s;
+    }
+    .events-img-grid img:hover { filter: brightness(.95) saturate(1.05); }
+    .events-img-grid img:first-child {
+      grid-column: 1 / 3; aspect-ratio: 2/1;
+    }
+    .feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px;
+    }
+    .feature-item {
+      background: var(--card); border: 1px solid var(--border); padding: 24px;
+    }
+    .feature-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; margin-bottom: 14px; }
+    .feature-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; color: var(--white); margin-bottom: 6px; font-weight: 400;
+    }
+    .feature-item p { font-size: .73rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep); border-top: 1px solid var(--border); padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px;
+      padding-bottom: 56px; border-bottom: 1px solid var(--border); margin-bottom: 36px;
+    }
+    .footer-logo { display: block; margin-bottom: 18px; }
+    .footer-brand p { font-size: .78rem; color: var(--muted); line-height: 1.85; max-width: 250px; }
+    .footer-col h4 {
+      font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 22px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 11px; }
+    .footer-col a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-col address { font-style: normal; font-size: .78rem; color: var(--muted); line-height: 2; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: .68rem; color: rgba(136,136,136,.45); }
+    .footer-powered { font-size: .64rem; color: rgba(136,136,136,.4); }
+    .footer-powered a { color: var(--gold); text-decoration: none; opacity: .7; transition: opacity .3s; }
+    .footer-powered a:hover { opacity: 1; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity: .3; }
+      50%      { opacity: 1; }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav, nav.scrolled { padding: 20px 28px; }
+      .container { padding: 0 28px; }
+      .about-grid, .chef-grid, .booking-inner,
+      .events-grid, .experience-grid { grid-template-columns: 1fr; gap: 56px; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .food-strip { grid-template-columns: repeat(3,1fr); }
+      .food-strip-item:nth-child(4),
+      .food-strip-item:nth-child(5) { display: none; }
+      .interior-strip { grid-template-columns: 1fr 1fr; height: auto; }
+      .interior-strip-item { height: 240px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .nav-links { display: none; }
+      .mosaic { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto; }
+      .m1,.m2,.m3,.m4,.m5,.m6 { grid-column: auto; grid-row: auto; height: 200px; }
+      .about-img-accent { display: none; }
+      .chef-quote { position: static; margin-top: 24px; max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 18px; }
+      .form-card { padding: 28px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .food-strip { grid-template-columns: 1fr 1fr; height: 200px; }
+      .food-strip-item:nth-child(3) { display: none; }
+      .interior-strip { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+      .events-img-grid img:first-child { grid-column: auto; aspect-ratio: 1; }
+      .hours-card, .location-card { padding: 28px 20px; }
+      .mosaic { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Maison Noir</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#chef">Chef</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#booking" class="nav-cta">Reserve</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Est. 2018 &nbsp;&middot;&nbsp; New York City</span>
+      <h1 class="hero-title">Maison<br><em>Noir</em></h1>
+      <p class="hero-sub">French technique meets contemporary imagination in a space of deliberate intimacy</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn-outline">View Menu</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- FOOD STRIP -->
+  <div class="food-strip">
+    <div class="food-strip-item">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Fine dining plate" loading="lazy" />
+    </div>
+    <div class="food-strip-item">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Fresh salad" loading="lazy" />
+    </div>
+    <div class="food-strip-item">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Breakfast plate" loading="lazy" />
+    </div>
+    <div class="food-strip-item">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Pizza" loading="lazy" />
+    </div>
+    <div class="food-strip-item">
+      <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80" alt="Dessert" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <img
+            class="about-img-main"
+            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80"
+            alt="Restaurant interior"
+            loading="lazy"
+          />
+          <img
+            class="about-img-accent"
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80"
+            alt="Dining experience"
+            loading="lazy"
+          />
+          <div class="about-badge">
+            <strong>6</strong>
+            <span>Years of Excellence</span>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <span class="section-label">Our Story</span>
+          <h2 class="section-title">Where Every Meal<br>Becomes <em>Memory</em></h2>
+          <div class="divider"></div>
+          <p>Maison Noir was born from a simple conviction: that exceptional dining is not merely about food, but about the entire world created around it. Chef Laurent Dubois brings two decades of Michelin-starred experience to every plate.</p>
+          <p>Our kitchen sources exclusively from regional farms within 150 miles of Manhattan. The menu changes with the seasons, never with trends. Each dish is conceived as a complete sensory narrative.</p>
+          <p>We seat just 42 guests per service. This is intentional. Intimacy is not incidental to our philosophy. It is the philosophy itself.</p>
+          <div class="about-stats">
+            <div class="stat"><strong>42</strong><span>Seats per service</span></div>
+            <div class="stat"><strong>12</strong><span>Course tasting menu</span></div>
+            <div class="stat"><strong>400</strong><span>Wine selections</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY MOSAIC -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="gallery-header reveal">
+        <span class="section-label">From Our Kitchen</span>
+        <h2 class="section-title">Food as <em>Art</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="mosaic reveal">
+        <div class="mosaic-item m1">
+          <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80" alt="Gourmet dish" loading="lazy" />
+        </div>
+        <div class="mosaic-item m2">
+          <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80" alt="Pasta dish" loading="lazy" />
+        </div>
+        <div class="mosaic-item m3">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt="Restaurant ambiance" loading="lazy" />
+        </div>
+        <div class="mosaic-item m4">
+          <img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80" alt="Wagyu beef" loading="lazy" />
+        </div>
+        <div class="mosaic-item m5">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80" alt="Pizza margherita" loading="lazy" />
+        </div>
+        <div class="mosaic-item m6">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" alt="Dessert" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="menu-header reveal">
+        <span class="section-label">Seasonal Selections</span>
+        <h2 class="section-title">A Taste of <em>Tonight</em></h2>
+        <div class="divider"></div>
+        <p style="color:var(--muted);font-size:.84rem;max-width:480px;margin:0 auto">Our menu evolves with the seasons. What follows is a glimpse of current offerings. The full experience unfolds at the table.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <img class="menu-card-img" src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&q=80" alt="Oyster dish" loading="lazy" />
+          <div class="menu-card-body">
+            <div class="menu-course">First Course</div>
+            <h3 class="menu-dish">Oyster Velouté</h3>
+            <p class="menu-desc">Kumamoto oysters, champagne foam, caviar, chive oil, toasted brioche crumble</p>
+            <span class="menu-price">$38</span>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <img class="menu-card-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Duck confit" loading="lazy" />
+          <div class="menu-card-body">
+            <div class="menu-course">Main Course</div>
+            <h3 class="menu-dish">Duck Confit</h3>
+            <p class="menu-desc">48-hour duck leg, sour cherry reduction, roasted celeriac, black truffle jus</p>
+            <span class="menu-price">$68</span>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <img class="menu-card-img" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80" alt="Chocolate dessert" loading="lazy" />
+          <div class="menu-card-body">
+            <div class="menu-course">Dessert</div>
+            <h3 class="menu-dish">Chocolate Terrain</h3>
+            <p class="menu-desc">Valrhona 72% ganache, smoked sea salt caramel, hazelnut praline, gold leaf</p>
+            <span class="menu-price">$24</span>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <img class="menu-card-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Burrata salad" loading="lazy" />
+          <div class="menu-card-body">
+            <div class="menu-course">Second Course</div>
+            <h3 class="menu-dish">Burrata &amp; Heirloom</h3>
+            <p class="menu-desc">Hand-pulled burrata, roasted heirloom tomatoes, basil oil, aged balsamic</p>
+            <span class="menu-price">$32</span>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <img class="menu-card-img" src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="Wagyu steak" loading="lazy" />
+          <div class="menu-card-body">
+            <div class="menu-course">Main Course</div>
+            <h3 class="menu-dish">Wagyu Tenderloin</h3>
+            <p class="menu-desc">A5 Miyazaki wagyu, bone marrow butter, pomme purée, red wine demi-glace</p>
+            <span class="menu-price">$145</span>
+          </div>
+        </div>
+        <div class="menu-card reveal">
+          <img class="menu-card-img" src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600&q=80" alt="Cheese board" loading="lazy" />
+          <div class="menu-card-body">
+            <div class="menu-course">Cheese Course</div>
+            <h3 class="menu-dish">Affinage Selection</h3>
+            <p class="menu-desc">Three seasonal cheeses, honeycomb, candied walnuts, quince paste, crackers</p>
+            <span class="menu-price">$28</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEF -->
+  <section class="chef" id="chef">
+    <div class="container">
+      <div class="chef-grid">
+        <div class="chef-img-wrap reveal">
+          <img
+            class="chef-img"
+            src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80"
+            alt="Chef in kitchen"
+            loading="lazy"
+          />
+          <div class="chef-quote">
+            <blockquote>"Every plate is a letter written to the guest. I want them to feel it was written only for them."</blockquote>
+            <cite>Chef Laurent Dubois</cite>
+          </div>
+        </div>
+        <div class="chef-text reveal">
+          <span class="section-label">The Kitchen</span>
+          <div class="chef-name">Laurent<br>Dubois</div>
+          <div class="chef-title">Executive Chef &nbsp;&middot;&nbsp; Founder</div>
+          <p>Chef Laurent trained under Alain Ducasse in Paris before earning his first Michelin star at 28 at La Maison Blanche, Lyon. His cooking is grounded in classical French technique and animated by a relentless curiosity about ingredient provenance.</p>
+          <p>Before founding Maison Noir he spent three years researching fermentation, aging, and preservation methods across Japan, Scandinavia, and the Basque Country. Those influences inform his menus quietly, without spectacle.</p>
+          <p>He is at the pass for every service. This will not change.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERIOR STRIP -->
+  <div class="interior-strip">
+    <div class="interior-strip-item">
+      <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=80" alt="Restaurant interior" loading="lazy" />
+    </div>
+    <div class="interior-strip-item">
+      <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=600&q=80" alt="Wine glasses" loading="lazy" />
+    </div>
+    <div class="interior-strip-item">
+      <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80" alt="Table setting" loading="lazy" />
+    </div>
+    <div class="interior-strip-item">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Fine dining" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- EXPERIENCE / HOURS -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="experience-grid">
+        <div class="reveal">
+          <span class="section-label">What to Expect</span>
+          <h2 class="section-title">The <em>Details</em></h2>
+          <div class="divider"></div>
+          <div class="exp-list">
+            <div class="exp-item">
+              <span class="exp-num">01</span>
+              <div>
+                <h3>Dress Code</h3>
+                <p>Smart casual to formal attire. Jackets are welcomed and appreciated for gentlemen. We ask guests to dress in a manner befitting the occasion.</p>
+              </div>
+            </div>
+            <div class="exp-item">
+              <span class="exp-num">02</span>
+              <div>
+                <h3>Arrival</h3>
+                <p>We ask guests to arrive within 15 minutes of their reservation. Late arrivals may result in a shortened experience out of respect for fellow diners.</p>
+              </div>
+            </div>
+            <div class="exp-item">
+              <span class="exp-num">03</span>
+              <div>
+                <h3>Duration</h3>
+                <p>A full tasting menu lasts approximately three to four hours. A la carte dining averages two to two and a half hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="hours-card">
+            <h3 class="hours-title">Opening Hours</h3>
+            <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-closed">Closed</span></div>
+            <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">6:00 PM to 10:30 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">6:00 PM to 10:30 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">6:00 PM to 10:30 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time">5:30 PM to 11:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">5:30 PM to 11:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">5:00 PM to 9:30 PM</span></div>
+          </div>
+          <div class="location-card">
+            <span class="section-label" style="margin-bottom:10px">Location</span>
+            <address>
+              147 West 57th Street<br />
+              New York, NY 10019<br /><br />
+              hello@maisonnoir.com<br />
+              +1 (212) 555 0147
+            </address>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="booking-inner">
+        <div class="booking-info reveal">
+          <span class="section-label">Reservations</span>
+          <h2 class="section-title">Reserve Your <em>Table</em></h2>
+          <div class="divider"></div>
+          <p>Reservations are strongly recommended. We accept bookings up to 60 days in advance and hold tables for 15 minutes past the reservation time.</p>
+          <p>For parties of 7 or more, or for special celebrations, please use our private events form below or contact us directly.</p>
+          <div class="booking-note">
+            <p><strong>Cancellation policy:</strong> We kindly ask for 24 hours notice for cancellations. We understand that plans change and will always do our best to accommodate.</p>
+          </div>
+          <img
+            class="booking-img"
+            src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80"
+            alt="Restaurant table setting"
+            loading="lazy"
+          />
+        </div>
+        <div class="reveal">
+          <div class="form-card">
+            <h3 class="form-title">Table Reservation</h3>
+            <p class="form-sub">We confirm your booking within 2 hours</p>
+            <form id="bookingForm" action="https://api.formgrid.dev/forms/YOUR_BOOKING_FORM_ID/submissions" method="POST">
+              <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_subject" id="bookingSubject" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Laurent" required />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Dubois" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="bookingEmail">Email Address</label>
+                  <input type="email" id="bookingEmail" name="email" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                  <label for="bookingPhone">Phone Number</label>
+                  <input type="tel" id="bookingPhone" name="phone" placeholder="+1 (212) 555 0100" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="bookingDate">Preferred Date</label>
+                  <input type="date" id="bookingDate" name="date" required />
+                </div>
+                <div class="form-group">
+                  <label for="bookingTime">Preferred Time</label>
+                  <select id="bookingTime" name="time" required>
+                    <option value="">Select a time</option>
+                    <option>5:30 PM</option>
+                    <option>6:00 PM</option>
+                    <option>6:30 PM</option>
+                    <option>7:00 PM</option>
+                    <option>7:30 PM</option>
+                    <option>8:00 PM</option>
+                    <option>8:30 PM</option>
+                    <option>9:00 PM</option>
+                    <option>9:30 PM</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="partySize">Party Size</label>
+                  <select id="partySize" name="partySize" required>
+                    <option value="">Number of guests</option>
+                    <option>1 guest</option>
+                    <option>2 guests</option>
+                    <option>3 guests</option>
+                    <option>4 guests</option>
+                    <option>5 guests</option>
+                    <option>6 guests</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="occasion">Special Occasion</label>
+                  <select id="occasion" name="occasion">
+                    <option value="">None</option>
+                    <option>Birthday</option>
+                    <option>Anniversary</option>
+                    <option>Proposal</option>
+                    <option>Business Dinner</option>
+                    <option>Other Celebration</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="dietaryRequirements">Dietary Requirements or Notes</label>
+                <textarea id="dietaryRequirements" name="dietaryRequirements" placeholder="Allergies, dietary restrictions, special requests..."></textarea>
+              </div>
+              <button type="submit" class="btn-submit" id="bookingBtn">Request Reservation</button>
+            </form>
+            <div class="form-success" id="bookingSuccess">
+              <div class="success-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Reservation Received</h3>
+              <p>We will confirm your table within 2 hours. We look forward to welcoming you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE EVENTS -->
+  <section class="events" id="events">
+    <div class="container">
+      <div class="events-grid">
+        <div class="reveal">
+          <span class="section-label">Private Dining</span>
+          <h2 class="section-title">Exclusive <em>Events</em></h2>
+          <div class="divider"></div>
+          <p style="color:var(--muted);font-size:.85rem;line-height:1.9;margin-bottom:16px">Our private dining room seats up to 24 guests for an experience tailored entirely to your occasion. From intimate corporate dinners to milestone celebrations, every detail is considered.</p>
+          <p style="color:var(--muted);font-size:.85rem;line-height:1.9">Chef Laurent will design a bespoke menu around your preferences. Our sommelier curates wine pairings to match every course.</p>
+          <div class="events-img-grid">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80" alt="Private dining room" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=500&q=80" alt="Wine service" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=500&q=80" alt="Table detail" loading="lazy" />
+          </div>
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <h4>Bespoke Menus</h4>
+              <p>Custom tasting menus designed around your preferences and dietary needs</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <h4>Wine Pairing</h4>
+              <p>Curated selections from our 400-bottle cellar matched to every course</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <h4>AV Equipment</h4>
+              <p>Discreet presentation facilities for corporate events and speeches</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-dot"></div>
+              <h4>Floral Design</h4>
+              <p>Bespoke arrangements coordinated with our preferred floral studio</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="form-card">
+            <h3 class="form-title">Private Event Enquiry</h3>
+            <p class="form-sub">Tell us about your occasion</p>
+            <form id="eventsForm" action="https://api.formgrid.dev/forms/YOUR_EVENTS_FORM_ID/submissions" method="POST">
+              <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_subject" id="eventsSubject" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="eventFirstName">First Name</label>
+                  <input type="text" id="eventFirstName" name="firstName" placeholder="Your name" required />
+                </div>
+                <div class="form-group">
+                  <label for="eventLastName">Last Name</label>
+                  <input type="text" id="eventLastName" name="lastName" placeholder="Your surname" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="eventEmail">Email Address</label>
+                  <input type="email" id="eventEmail" name="email" placeholder="you@example.com" required />
+                </div>
+                <div class="form-group">
+                  <label for="eventPhone">Phone Number</label>
+                  <input type="tel" id="eventPhone" name="phone" placeholder="+1 (212) 555 0100" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="eventType">Type of Event</label>
+                <select id="eventType" name="eventType" required>
+                  <option value="">Select event type</option>
+                  <option>Birthday Celebration</option>
+                  <option>Anniversary Dinner</option>
+                  <option>Corporate Dinner</option>
+                  <option>Wedding Anniversary</option>
+                  <option>Proposal Dinner</option>
+                  <option>Product Launch</option>
+                  <option>Team Celebration</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="eventDate">Preferred Date</label>
+                  <input type="date" id="eventDate" name="eventDate" required />
+                </div>
+                <div class="form-group">
+                  <label for="eventGuests">Number of Guests</label>
+                  <input type="number" id="eventGuests" name="guestCount" min="8" max="24" placeholder="8 to 24 guests" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="eventBudget">Approximate Budget per Person</label>
+                <select id="eventBudget" name="budget">
+                  <option value="">Select budget range</option>
+                  <option>$150 to $200 per person</option>
+                  <option>$200 to $300 per person</option>
+                  <option>$300 to $500 per person</option>
+                  <option>$500 and above per person</option>
+                  <option>Open to discussion</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="eventMessage">Tell Us About Your Occasion</label>
+                <textarea id="eventMessage" name="message" placeholder="Share details about your event, special requests, dietary requirements, or anything we should know..." required></textarea>
+              </div>
+              <button type="submit" class="btn-submit" id="eventsBtn">Send Enquiry</button>
+            </form>
+            <div class="form-success" id="eventsSuccess">
+              <div class="success-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3>Enquiry Received</h3>
+              <p>Our events team will be in touch within 24 hours to discuss your occasion in detail.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo footer-logo">Maison Noir</a>
+          <p>An intimate fine dining experience where French technique meets contemporary imagination. 42 seats. One kitchen. No compromises.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#chef">Chef</a></li>
+            <li><a href="#events">Private Events</a></li>
+            <li><a href="#booking">Reservations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Hours</h4>
+          <ul>
+            <li><a href="#">Tuesday to Thursday</a></li>
+            <li><a href="#">6:00 PM to 10:30 PM</a></li>
+            <li><a href="#">Friday to Saturday</a></li>
+            <li><a href="#">5:30 PM to 11:00 PM</a></li>
+            <li><a href="#">Sunday 5:00 to 9:30 PM</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <address>
+            147 West 57th Street<br />
+            New York, NY 10019<br /><br />
+            hello@maisonnoir.com<br />
+            +1 (212) 555 0147
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright &copy; 2026 Maison Noir. All rights reserved.</p>
+        <p class="footer-powered">Forms powered by <a href="https://formgrid.dev" target="_blank">Formgrid</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 70);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+
+    // Min date today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('bookingDate').min = today;
+    document.getElementById('eventDate').min = today;
+
+    // Booking form
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingBtn  = document.getElementById('bookingBtn');
+    const bookingSuccess = document.getElementById('bookingSuccess');
+
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (bookingForm._honey && bookingForm._honey.value) return;
+      const name = bookingForm.firstName.value + ' ' + bookingForm.lastName.value;
+      document.getElementById('bookingSubject').value =
+        'Table Reservation: ' + name + ' | ' + bookingForm.date.value + ' at ' + bookingForm.time.value + ' | ' + bookingForm.partySize.value;
+      bookingBtn.textContent = 'Sending...';
+      bookingBtn.disabled = true;
+      try {
+        const res = await fetch(bookingForm.action, { method: 'POST', body: new FormData(bookingForm) });
+        if (res.ok) {
+          bookingForm.style.display = 'none';
+          bookingSuccess.style.display = 'block';
+        } else { throw new Error(); }
+      } catch {
+        bookingBtn.textContent = 'Something went wrong. Please try again.';
+        bookingBtn.disabled = false;
+      }
+    });
+
+    // Events form
+    const eventsForm = document.getElementById('eventsForm');
+    const eventsBtn  = document.getElementById('eventsBtn');
+    const eventsSuccess = document.getElementById('eventsSuccess');
+
+    eventsForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (eventsForm._honey && eventsForm._honey.value) return;
+      const name = eventsForm.firstName.value + ' ' + eventsForm.lastName.value;
+      document.getElementById('eventsSubject').value =
+        'Private Event: ' + eventsForm.eventType.value + ' | ' + name + ' | ' + eventsForm.guestCount.value + ' guests';
+      eventsBtn.textContent = 'Sending...';
+      eventsBtn.disabled = true;
+      try {
+        const res = await fetch(eventsForm.action, { method: 'POST', body: new FormData(eventsForm) });
+        if (res.ok) {
+          eventsForm.style.display = 'none';
+          eventsSuccess.style.display = 'block';
+        } else { throw new Error(); }
+      } catch {
+        eventsBtn.textContent = 'Something went wrong. Please try again.';
+        eventsBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
